@@ -31,7 +31,7 @@ const Hero = () => {
     }
   };
   const navigateToAssessment = () => {
-    window.location.href = '/assessment';
+    window.location.href = '/business-assessment';
   };
   return <motion.div className="relative w-full" initial="hidden" animate="visible" variants={containerVariants}>
       <div className="banner-container bg-transparent relative overflow-hidden h-screen w-full">
