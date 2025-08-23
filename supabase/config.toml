@@ -1,0 +1,7 @@
+project_id = "nvpnweczvrhijljvrips"
+
+[functions.send-assessment]
+verify_jwt = false
+
+[functions.chat-bot]
+verify_jwt = false
