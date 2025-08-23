@@ -116,12 +116,12 @@ const Auth = () => {
             <div className="text-center space-y-3">
               <p className="text-sm text-gray-600">Don't have credentials yet?</p>
               <Button 
-                variant="outline" 
+                variant="ghost" 
                 size="sm"
                 asChild
-                className="w-full"
+                className="text-primary hover:text-primary-foreground hover:bg-primary border border-primary/20 font-medium"
               >
-                <Link to="/business-assessment">Contact Reforzo for Client Access</Link>
+                <Link to="/business-assessment">Request Client Account</Link>
               </Button>
             </div>
             <div className="text-center text-sm text-gray-600">
