@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
+import { useAuth } from '@/hooks/useAuth';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut, loading } = useAuth();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -141,6 +144,47 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+            
+            {/* Auth Buttons */}
+            <div className="ml-4 flex items-center space-x-2">
+              {!loading && (
+                user ? (
+                  <div className="flex items-center space-x-2">
+                    <div className={cn("flex items-center space-x-1", isScrolled ? "text-gray-700" : "text-white")}>
+                      <User size={16} />
+                      <span className="text-sm">{user.email?.split('@')[0]}</span>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={signOut}
+                      className={cn(
+                        "flex items-center space-x-1",
+                        isScrolled 
+                          ? "border-gray-300 text-gray-700 hover:bg-gray-50" 
+                          : "border-gray-300 text-gray-700 hover:bg-white"
+                      )}
+                    >
+                      <LogOut size={14} />
+                      <span>Sign Out</span>
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className={cn(
+                      isScrolled 
+                        ? "border-gray-300 text-gray-700 hover:bg-gray-50" 
+                        : "border-white text-white hover:bg-white hover:text-gray-900"
+                    )}
+                  >
+                    <Link to="/auth">Sign In</Link>
+                  </Button>
+                )
+              )}
+            </div>
           </div>
           
           {/* Mobile menu button */}
@@ -203,6 +247,37 @@ const Navbar = () => {
         }}>
             Request Assessment
           </Link>
+          
+          {/* Mobile Auth */}
+          {!loading && (
+            user ? (
+              <div className="space-y-2 pt-2 border-t border-gray-200">
+                <div className={cn("px-3 py-1.5 text-sm", isScrolled ? "text-gray-600" : "text-gray-300")}>
+                  {user.email}
+                </div>
+                <button
+                  onClick={() => {
+                    signOut();
+                    setIsMenuOpen(false);
+                  }}
+                  className={cn("block w-full text-left px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")}
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <Link 
+                to="/auth" 
+                className={cn("block px-3 py-1.5 rounded-md text-sm font-medium", isScrolled ? "text-gray-700 bg-gray-200 hover:bg-gray-300" : "text-white bg-blue-600 hover:bg-blue-700")} 
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Sign In
+              </Link>
+            )
+          )}
         </div>
       </div>
     </motion.nav>;

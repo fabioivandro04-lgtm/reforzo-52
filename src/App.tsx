@@ -18,6 +18,7 @@ const Careers = lazy(() => import("./pages/Careers"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const News = lazy(() => import("./pages/News"));
 const BlogPostDetail = lazy(() => import("./pages/BlogPostDetail"));
+const Auth = lazy(() => import("./pages/Auth"));
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -32,6 +33,7 @@ const App = () => {
             <Suspense fallback={<LoadingAnimation />}>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/auth" element={<Auth />} />
                 <Route path="/business-assessment" element={<BusinessAssessment />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/methodology" element={<Methodology />} />
