@@ -113,9 +113,16 @@ const Auth = () => {
           </form>
           
           <div className="mt-6 space-y-3">
-            <div className="text-center text-sm text-gray-600">
-              <p>Don't have credentials yet?</p>
-              <p className="text-xs">Contact Reforzo to set up your client account.</p>
+            <div className="text-center space-y-3">
+              <p className="text-sm text-gray-600">Don't have credentials yet?</p>
+              <Button 
+                variant="outline" 
+                size="sm"
+                asChild
+                className="w-full"
+              >
+                <Link to="/business-assessment">Contact Reforzo for Client Access</Link>
+              </Button>
             </div>
             <div className="text-center text-sm text-gray-600">
               <Link to="/" className="hover:text-primary transition-colors">
