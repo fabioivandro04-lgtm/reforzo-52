@@ -34,20 +34,8 @@ const Index = () => {
       
       {/* New Section */}
       <section className="h-screen bg-transparent flex items-center relative overflow-hidden -mt-32">
-        {/* Fade Effect Overlay */}
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20"
-          initial={{ opacity: 0.8 }}
-          animate={{ 
-            opacity: [0.3, 0.1, 0.3],
-          }}
-          transition={{ 
-            duration: 8, 
-            repeat: Infinity, 
-            ease: [0.4, 0, 0.2, 1],
-            repeatType: "reverse"
-          }}
-        />
+        {/* Black Background Overlay */}
+        <div className="absolute inset-0 bg-black" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
