@@ -277,19 +277,23 @@ const ResolveService = () => {
             </h2>
             
             <div ref={timelineRef} className="space-y-12 relative">
-              {/* Professional animated connecting line */}
-              <div className={`absolute left-8 top-16 w-0.5 bg-slate-600/30 transition-all duration-1500 ease-out ${
-                visibleTimelineSteps.length > 0 ? 'h-72' : 'h-0'
+              {/* Clean segmented connecting lines */}
+              {/* First segment: Icon 1 to Icon 2 */}
+              <div className={`absolute left-8 top-20 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
+                visibleTimelineSteps.includes(0) ? 'h-16' : 'h-0'
               }`}>
-                {/* Animated progress indicator */}
-                <div 
-                  className={`w-0.5 bg-gradient-to-b from-slate-400 to-emerald-400 transition-all duration-2000 ease-out ${
-                    visibleTimelineSteps.length >= 3 ? 'h-full opacity-100' : 'h-0 opacity-60'
-                  }`}
-                  style={{
-                    boxShadow: visibleTimelineSteps.length >= 3 ? '0 0 8px rgba(148, 163, 184, 0.4)' : 'none'
-                  }}
-                ></div>
+                <div className={`w-0.5 bg-slate-400 transition-all duration-1200 delay-300 ${
+                  visibleTimelineSteps.includes(1) ? 'h-full' : 'h-0'
+                }`}></div>
+              </div>
+              
+              {/* Second segment: Icon 2 to Icon 3 */}
+              <div className={`absolute left-8 top-52 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
+                visibleTimelineSteps.includes(1) ? 'h-16' : 'h-0'
+              }`}>
+                <div className={`w-0.5 bg-emerald-400 transition-all duration-1200 delay-500 ${
+                  visibleTimelineSteps.includes(2) ? 'h-full' : 'h-0'
+                }`}></div>
               </div>
               <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 ${
                 visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
