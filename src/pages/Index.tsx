@@ -13,9 +13,9 @@ import { motion } from 'framer-motion';
 import { useDailyCounter } from '@/hooks/useDailyCounter';
 
 const Index = () => {
-  const { currentValue: clientSatisfaction, isAnimating } = useDailyCounter({
-    baseValue: 95,
-    storageKey: 'clientSatisfaction',
+  const { currentValue: businessesTransformed, isAnimating } = useDailyCounter({
+    baseValue: 500,
+    storageKey: 'businessesTransformed',
     minIncrement: 0,
     maxIncrement: 5
   });
@@ -89,16 +89,6 @@ const Index = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className={`text-3xl font-bold text-white mb-2 ${isAnimating ? 'animate-pulse' : ''}`}>{clientSatisfaction}%</div>
-                <div className="text-gray-300 text-sm">Client Satisfaction</div>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
                 <div className="text-3xl font-bold text-white mb-2">40%</div>
                 <div className="text-gray-300 text-sm">Average Efficiency Gain</div>
               </motion.div>
@@ -107,9 +97,19 @@ const Index = () => {
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <div className="text-3xl font-bold text-white mb-2">98%</div>
+                <div className="text-gray-300 text-sm">Client Retention Rate</div>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <div className="text-3xl font-bold text-white mb-2">500+</div>
+                <div className={`text-3xl font-bold text-white mb-2 ${isAnimating ? 'animate-pulse' : ''}`}>{businessesTransformed}+</div>
                 <div className="text-gray-300 text-sm">Businesses Transformed</div>
               </motion.div>
               
