@@ -85,16 +85,16 @@ const ResolveService = () => {
                 Customer queries shouldn't mean chaos in your inbox. Re:Solve integrates seamlessly with Gmail to help you automate repetitive replies, track open requests, and ensure every customer gets a timely, accurate response.
               </p>
               <div className="flex items-center space-x-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-slate-700">90%</div>
+                <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+                  <div className="text-3xl font-bold text-slate-700 hover:scale-110 transition-transform duration-300">90%</div>
                   <div className="text-sm text-gray-500">Faster Responses</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-slate-700">Zero</div>
+                <div className="text-center animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+                  <div className="text-3xl font-bold text-slate-700 hover:scale-110 transition-transform duration-300">Zero</div>
                   <div className="text-sm text-gray-500">Setup Complexity</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-slate-700">100%</div>
+                <div className="text-center animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+                  <div className="text-3xl font-bold text-slate-700 hover:scale-110 transition-transform duration-300">100%</div>
                   <div className="text-sm text-gray-500">Gmail Native</div>
                 </div>
               </div>
