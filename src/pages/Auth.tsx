@@ -62,7 +62,7 @@ const Auth = () => {
         <CardHeader className="text-center">
           <Link to="/" className="inline-block mb-4">
             <img 
-              src="/lovable-uploads/3841b91f-6deb-4b58-849b-267bbd7cbed4.png" 
+              src="/lovable-uploads/85295fab-5654-420c-b051-efeeb126f374.png" 
               alt="Reforzo Logo" 
               className="h-12 w-auto hover:scale-105 transition-transform"
             />
