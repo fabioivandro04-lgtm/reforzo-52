@@ -269,8 +269,14 @@ const ResolveService = () => {
       </section>
 
       {/* How It Works - Vertical Timeline */}
-      <section className="py-12 bg-gray-900 text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-12 bg-gray-900 text-white relative">
+        {/* Gradient fade from section above */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-gray-50 to-transparent pointer-events-none"></div>
+        
+        {/* Gradient fade to section below */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
               How Re:Solve <span className="text-slate-700">Works</span> in Your Inbox
