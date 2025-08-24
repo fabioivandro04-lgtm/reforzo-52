@@ -69,26 +69,6 @@ const Hero = () => {
             playsInline
             className={`w-full h-full object-cover opacity-70 ${isMobile ? 'object-right' : 'object-center'}`}
           />
-          {/* Animated Gradient Overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white mix-blend-lighten"
-            initial={{ opacity: 0.8 }}
-            animate={{ 
-              opacity: [0.8, 0.9, 0.8],
-            }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity, 
-              ease: [0.4, 0, 0.2, 1],
-              repeatType: "reverse"
-            }}
-            style={{
-              background: useTransform(scrollY, [0, 300], [
-                "linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%)",
-                "linear-gradient(to bottom, transparent 0%, transparent 30%, rgba(255,255,255,0.98) 45%, rgba(255,255,255,1) 55%, rgba(255,255,255,1) 100%)"
-              ])
-            }}
-          />
         </motion.div>
         
         {/* Content with Parallax */}
