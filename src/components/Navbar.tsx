@@ -98,6 +98,12 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li>
+                        <Link to="/signal" className="block p-3 space-y-1 rounded-md hover:bg-gray-100 bg-white">
+                          <div className="font-medium text-gray-900">The Signal</div>
+                          <p className="text-sm text-gray-500">Weekly briefing on the future of technology</p>
+                        </Link>
+                      </li>
+                      <li>
                         <div className="block p-3 space-y-1 rounded-md hover:bg-gray-100 bg-white cursor-pointer">
                           <div className="font-medium text-gray-900">Process Optimization</div>
                           <p className="text-sm text-gray-500">Streamline workflows and boost productivity</p>

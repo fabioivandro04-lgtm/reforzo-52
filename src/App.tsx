@@ -20,6 +20,7 @@ const News = lazy(() => import("./pages/News"));
 const BlogPostDetail = lazy(() => import("./pages/BlogPostDetail"));
 const Auth = lazy(() => import("./pages/Auth"));
 const ResolveService = lazy(() => import("./pages/ResolveService"));
+const TheSignal = lazy(() => import("./pages/TheSignal"));
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -35,6 +36,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/resolve" element={<ResolveService />} />
+                <Route path="/signal" element={<TheSignal />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/business-assessment" element={<BusinessAssessment />} />
                 <Route path="/about" element={<About />} />
