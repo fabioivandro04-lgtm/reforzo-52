@@ -135,51 +135,56 @@ const ResolveService = () => {
       {/* Hero Section - Asymmetric Design */}
       <section className="relative pt-20 pb-24 bg-gradient-to-br from-slate-900 via-gray-800 to-slate-800 overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-600/20 to-transparent"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-600/20 to-transparent animate-pulse-slow"></div>
+        
+        {/* Floating background elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-slate-400/10 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-gray-400/10 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-slate-300/10 rounded-full animate-float" style={{ animationDelay: '4s' }}></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
-              <Badge className="mb-6 bg-slate-500/20 text-slate-200 border-slate-400/30">
+            <div className="text-white animate-fade-in">
+              <Badge className="mb-6 bg-slate-500/20 text-slate-200 border-slate-400/30 animate-bounce-subtle">
                 Gmail Integration
               </Badge>
-              <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight animate-slide-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
                 Re:Solve
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-gray-100">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-gray-100 animate-shimmer">
                   Customer Support
                 </span>
                 <span className="block text-2xl md:text-3xl font-normal text-gray-300">
                   in Gmail
                 </span>
               </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl text-gray-300 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
                 Transform your inbox into a powerful support hub. Automate responses, manage requests, and solve customer issues faster—all without switching tabs.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-slate-700 hover:bg-slate-600 text-white px-8 py-4 text-lg group">
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+                <Button size="lg" className="bg-slate-700 hover:bg-slate-600 text-white px-8 py-4 text-lg group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                   Get Started with Gmail
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg">
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg transform transition-all duration-300 hover:scale-105">
                   Watch Demo
                 </Button>
               </div>
             </div>
             
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+            <div className="relative animate-float">
+              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 hover:scale-105">
                   <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Mail className="w-6 h-6 text-slate-300" />
                     <span className="text-white font-medium">Gmail Interface Enhanced</span>
                   </div>
-                  <div className="bg-white/5 rounded-lg p-4 space-y-2">
+                  <div className="bg-white/5 rounded-lg p-4 space-y-2 hover:bg-white/10 transition-all duration-300">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-300">Support Tickets</span>
                       <Badge className="bg-emerald-600/20 text-emerald-300">Auto-Tagged</Badge>
                     </div>
-                    <div className="h-2 bg-gray-700 rounded-full">
-                      <div className="h-2 bg-slate-600 rounded-full w-3/4"></div>
+                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="h-2 bg-slate-600 rounded-full w-3/4 animate-pulse"></div>
                     </div>
                   </div>
                 </div>
