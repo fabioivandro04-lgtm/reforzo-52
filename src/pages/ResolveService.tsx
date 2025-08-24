@@ -276,7 +276,17 @@ const ResolveService = () => {
               How Re:Solve <span className="text-slate-700">Works</span> in Your Inbox
             </h2>
             
-            <div ref={timelineRef} className="space-y-12">
+            <div ref={timelineRef} className="space-y-12 relative">
+              {/* Animated flowing line */}
+              <div className={`absolute left-8 top-8 w-px bg-gradient-to-b from-slate-500 via-gray-500 to-emerald-500 transition-all duration-2000 ${
+                visibleTimelineSteps.length > 0 ? 'h-80 opacity-100' : 'h-0 opacity-0'
+              }`}>
+                <div className={`w-1 h-8 bg-gradient-to-b from-white to-transparent rounded-full transition-all duration-3000 ${
+                  visibleTimelineSteps.length >= 3 ? 'animate-bounce-slow opacity-100' : 'opacity-0'
+                }`} style={{
+                  animation: visibleTimelineSteps.length >= 3 ? 'flow-down 3s ease-in-out infinite' : undefined
+                }}></div>
+              </div>
               <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 ${
                 visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`} data-step="0">
