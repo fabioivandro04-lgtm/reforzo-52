@@ -277,36 +277,6 @@ const ResolveService = () => {
             </h2>
             
             <div ref={timelineRef} className="space-y-12 relative">
-              {/* Clean dotted connectors */}
-              {/* First connector dots */}
-              <div className="absolute left-8 top-24 flex flex-col items-center space-y-2">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className={`w-1 h-1 bg-slate-400 rounded-full transition-all duration-500 ${
-                      visibleTimelineSteps.includes(0) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-                    }`}
-                    style={{
-                      transitionDelay: visibleTimelineSteps.includes(0) ? `${i * 200}ms` : '0ms'
-                    }}
-                  />
-                ))}
-              </div>
-              
-              {/* Second connector dots */}
-              <div className="absolute left-8 top-56 flex flex-col items-center space-y-2">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className={`w-1 h-1 bg-emerald-400 rounded-full transition-all duration-500 ${
-                      visibleTimelineSteps.includes(1) && visibleTimelineSteps.includes(2) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-                    }`}
-                    style={{
-                      transitionDelay: (visibleTimelineSteps.includes(1) && visibleTimelineSteps.includes(2)) ? `${i * 200}ms` : '0ms'
-                    }}
-                  />
-                ))}
-              </div>
               <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 ${
                 visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`} data-step="0">
