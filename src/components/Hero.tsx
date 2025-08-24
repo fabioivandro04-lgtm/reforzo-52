@@ -108,26 +108,11 @@ const Hero = () => {
                 </motion.button>
               </motion.div>
             </motion.div>
-            
-            {/* Bouncing Scroll Indicator */}
-            <motion.div 
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-              variants={scrollIndicatorVariants}
-              animate="animate"
-            >
-              <motion.div 
-                className="flex flex-col items-center text-white/70 cursor-pointer"
-                whileHover={{ y: -2, color: "rgba(255,255,255,0.9)" }}
-                onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-              >
-                <span className="text-sm mb-2 hidden sm:block">Scroll to explore</span>
-                <ChevronDown className="w-6 h-6" />
-              </motion.div>
-            </motion.div>
           </div>
         </motion.div>
       </div>
     </motion.div>
   );
 };
+
 export default Hero;
