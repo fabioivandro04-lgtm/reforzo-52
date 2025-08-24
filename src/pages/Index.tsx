@@ -36,8 +36,8 @@ const Index = () => {
       <section className="h-screen bg-transparent flex items-center relative overflow-hidden -mt-32">
         {/* Fade Effect Overlay */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent"
-          initial={{ opacity: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20"
+          initial={{ opacity: 0.8 }}
           animate={{ 
             opacity: [0.3, 0.1, 0.3],
           }}
@@ -50,10 +50,10 @@ const Index = () => {
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Transform Your Business Today
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
               Join thousands of businesses that have revolutionized their operations with our proven methodology and innovative approach.
             </p>
           </div>
