@@ -512,19 +512,6 @@ const TheSignal = () => {
 
           <motion.div variants={itemVariants} className="space-y-8">
 
-            <Card className="p-8 border-slate-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <CheckSquare className="w-5 h-5 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Say It Aloud</h3>
-                  <p className="text-slate-600">
-                    "Sign up for The Signal Weekly" vs. "Check out the new Signal Fire." Which feels better to say?
-                  </p>
-                </div>
-              </div>
-            </Card>
 
             <Card className="p-8 border-slate-200">
               <div className="flex items-start space-x-4">
