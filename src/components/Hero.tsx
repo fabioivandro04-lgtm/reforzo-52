@@ -68,17 +68,23 @@ const Hero = () => {
           />
           {/* Animated Gradient Overlay */}
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-b from-transparent via-black/60 to-white"
-            initial={{ opacity: 0.6 }}
+            className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-white/95"
+            initial={{ opacity: 0.7 }}
             animate={{ 
-              opacity: [0.6, 0.8, 0.6],
-              background: [
-                "linear-gradient(to bottom, transparent, rgba(0,0,0,0.6), white)",
-                "linear-gradient(to bottom, transparent, rgba(0,0,0,0.8), white)",
-                "linear-gradient(to bottom, transparent, rgba(0,0,0,0.6), white)"
-              ]
+              opacity: [0.7, 0.85, 0.7],
             }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: [0.4, 0, 0.2, 1],
+              repeatType: "reverse"
+            }}
+            style={{
+              background: useTransform(scrollY, [0, 300], [
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 50%, rgba(255,255,255,0.95) 100%)",
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 40%, rgba(255,255,255,1) 90%)"
+              ])
+            }}
           />
         </motion.div>
         
