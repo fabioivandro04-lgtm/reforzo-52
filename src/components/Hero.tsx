@@ -73,8 +73,8 @@ const Hero = () => {
         
         {/* Content with Parallax */}
         <motion.div 
-          className="banner-overlay bg-gradient-to-b from-transparent via-transparent to-black absolute inset-0 w-full h-full flex items-center justify-center"
-          style={{ y: contentY }}
+          className="banner-overlay bg-gradient-to-b from-transparent via-black/40 to-black absolute inset-0 w-full h-full flex items-center justify-center"
+          style={{ y: 0 }}
         >
           <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full">
             <motion.div className="w-full max-w-4xl text-center" variants={itemVariants}>
