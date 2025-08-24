@@ -46,8 +46,10 @@ const AnimatedCounter = ({ target, suffix = '', delay = 0 }: { target: number; s
 const ResolveService = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const benefitsRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [visibleBenefits, setVisibleBenefits] = useState<number[]>([]);
+  const [ctaVisible, setCtaVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -83,6 +85,23 @@ const ResolveService = () => {
     );
 
     benefitCards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCtaVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ctaRef.current) {
+      observer.observe(ctaRef.current);
+    }
 
     return () => observer.disconnect();
   }, []);
@@ -421,21 +440,31 @@ const ResolveService = () => {
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-gray-400/10 rounded-full translate-x-48 translate-y-48"></div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+        <div ref={ctaRef} className="container mx-auto px-4 relative z-10">
+          <div className={`max-w-4xl mx-auto text-center text-white transition-all duration-1000 ${
+            ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+            <h2 className={`text-4xl md:text-6xl font-bold mb-6 transition-all duration-700 delay-200 ${
+              ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
               Ready to Re:Solve Your
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-gray-100">
                 Customer Support?
               </span>
             </h2>
-            <p className="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
+            <p className={`text-xl mb-10 opacity-90 max-w-2xl mx-auto transition-all duration-700 delay-400 ${
+              ctaVisible ? 'opacity-90 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
               Start providing faster, more organized support today without leaving Gmail. Join thousands of teams already saving hours daily.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 delay-600 ${
+              ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
               <Button 
                 size="lg" 
-                className="bg-white text-slate-700 hover:bg-gray-50 px-10 py-4 text-lg font-semibold group"
+                className={`bg-white text-slate-700 hover:bg-gray-50 px-10 py-4 text-lg font-semibold group transform transition-all duration-300 hover:scale-105 ${
+                  ctaVisible ? 'animate-pulse-slow' : ''
+                }`}
               >
                 Add to Gmail
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -443,7 +472,7 @@ const ResolveService = () => {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 px-10 py-4 text-lg"
+                className="border-white/30 text-white hover:bg-white/10 px-10 py-4 text-lg transform transition-all duration-300 hover:scale-105"
               >
                 Schedule Demo
               </Button>
