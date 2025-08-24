@@ -279,8 +279,8 @@ const ResolveService = () => {
             <div ref={timelineRef} className="space-y-12 relative">
               {/* Clean segmented connecting lines */}
               {/* First segment: Icon 1 to Icon 2 */}
-              <div className={`absolute left-8 top-20 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
-                visibleTimelineSteps.includes(0) ? 'h-16' : 'h-0'
+              <div className={`absolute left-8 top-24 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
+                visibleTimelineSteps.includes(0) ? 'h-24' : 'h-0'
               }`}>
                 <div className={`w-0.5 bg-slate-400 transition-all duration-1200 delay-300 ${
                   visibleTimelineSteps.includes(1) ? 'h-full' : 'h-0'
@@ -288,8 +288,8 @@ const ResolveService = () => {
               </div>
               
               {/* Second segment: Icon 2 to Icon 3 */}
-              <div className={`absolute left-8 top-52 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
-                visibleTimelineSteps.includes(1) ? 'h-16' : 'h-0'
+              <div className={`absolute left-8 top-64 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
+                visibleTimelineSteps.includes(1) ? 'h-24' : 'h-0'
               }`}>
                 <div className={`w-0.5 bg-emerald-400 transition-all duration-1200 delay-500 ${
                   visibleTimelineSteps.includes(2) ? 'h-full' : 'h-0'
