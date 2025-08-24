@@ -45,7 +45,9 @@ const AnimatedCounter = ({ target, suffix = '', delay = 0 }: { target: number; s
 
 const ResolveService = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const benefitsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [visibleBenefits, setVisibleBenefits] = useState<number[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -60,6 +62,27 @@ const ResolveService = () => {
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const benefitCards = benefitsRef.current?.querySelectorAll('.benefit-card');
+    if (!benefitCards) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0');
+            setVisibleBenefits(prev => [...new Set([...prev, index])]);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-50px' }
+    );
+
+    benefitCards.forEach((card) => observer.observe(card));
 
     return () => observer.disconnect();
   }, []);
@@ -290,13 +313,15 @@ const ResolveService = () => {
         <div ref={sectionRef} className={`container mx-auto px-4 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="max-w-6xl mx-auto">
+        <div ref={benefitsRef} className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-16">
               Why Use <span className="text-slate-700">Re:Solve?</span>
             </h2>
             
-            <div className="space-y-12">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className={`space-y-12 ${visibleBenefits.length > 0 ? 'animate-fade-in' : ''}`}>
+              <div className={`grid lg:grid-cols-2 gap-12 items-center benefit-card transition-all duration-700 ${
+                visibleBenefits.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`} data-index="0">
                 <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-8 rounded-2xl">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Work Where You Already Are</h3>
                   <p className="text-gray-700 text-lg leading-relaxed">
@@ -310,7 +335,9 @@ const ResolveService = () => {
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className={`grid lg:grid-cols-2 gap-12 items-center benefit-card transition-all duration-700 ${
+                visibleBenefits.includes(1) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} data-index="1">
                 <div className="text-center order-2 lg:order-1">
                   <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Clock className="w-12 h-12 text-emerald-700" />
@@ -324,7 +351,9 @@ const ResolveService = () => {
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className={`grid lg:grid-cols-2 gap-12 items-center benefit-card transition-all duration-700 ${
+                visibleBenefits.includes(2) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`} data-index="2">
                 <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Never Drop the Ball</h3>
                   <p className="text-gray-700 text-lg leading-relaxed">
