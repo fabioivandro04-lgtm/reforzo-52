@@ -36,10 +36,10 @@ const Index = () => {
       <section className="h-screen bg-white flex items-center relative overflow-hidden">
         {/* Fade Effect Overlay */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/95 to-white"
-          initial={{ opacity: 0.8 }}
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-white/95"
+          initial={{ opacity: 0.7 }}
           animate={{ 
-            opacity: [0.8, 0.95, 0.8],
+            opacity: [0.7, 0.85, 0.7],
           }}
           transition={{ 
             duration: 6, 
