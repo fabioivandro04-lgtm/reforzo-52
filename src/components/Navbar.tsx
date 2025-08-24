@@ -44,17 +44,6 @@ const Navbar = () => {
             </Link>
           </div>
           
-          {/* Center Image */}
-          <div className="hidden md:flex w-1/3 justify-center">
-            <motion.img 
-              src="/lovable-uploads/3841b91f-6deb-4b58-849b-267bbd7cbed4.png" 
-              alt="Center Logo" 
-              className="h-4 sm:h-6 md:h-8 lg:h-10 xl:h-12 w-auto"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            />
-          </div>
-          
           {/* Desktop Navigation */}
           <div className="hidden md:flex w-1/3 justify-end">
             <NavigationMenu>
