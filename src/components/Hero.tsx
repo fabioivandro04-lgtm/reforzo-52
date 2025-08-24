@@ -81,8 +81,8 @@ const Hero = () => {
             }}
             style={{
               background: useTransform(scrollY, [0, 300], [
-                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 40%, rgba(255,255,255,0.9) 70%, rgba(255,255,255,1) 80%, rgba(255,255,255,1) 100%)",
-                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 35%, rgba(255,255,255,0.95) 75%, rgba(255,255,255,1) 85%, rgba(255,255,255,1) 100%)"
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 30%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,1) 70%, rgba(255,255,255,1) 100%)",
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 25%, rgba(255,255,255,0.98) 65%, rgba(255,255,255,1) 75%, rgba(255,255,255,1) 100%)"
               ])
             }}
           />
