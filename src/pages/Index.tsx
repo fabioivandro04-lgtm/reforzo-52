@@ -32,16 +32,89 @@ const Index = () => {
       />
       <Hero />
       
-      {/* New Section */}
+      {/* Value Proposition Section */}
       <section className="h-screen bg-black flex items-center relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Transform Your Business Today
-            </h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto">
-              Join thousands of businesses that have revolutionized their operations with our proven methodology and innovative approach.
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <motion.h2 
+                className="text-4xl sm:text-5xl font-bold text-white mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                Why Choose Reforzo?
+              </motion.h2>
+              <motion.p 
+                className="text-lg text-gray-300 mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                We don't just consult – we transform. Our innovative metrics-driven approach helps businesses achieve measurable operational excellence through the perfect integration of people, processes, and technology.
+              </motion.p>
+              <motion.div 
+                className="space-y-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span className="text-white">Proven methodology with measurable results</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span className="text-white">Tailored solutions for SMEs and corporations</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span className="text-white">Expert team with industry experience</span>
+                </div>
+              </motion.div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-6">
+              <motion.div 
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className="text-3xl font-bold text-white mb-2">95%</div>
+                <div className="text-gray-300 text-sm">Client Satisfaction</div>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <div className="text-3xl font-bold text-white mb-2">40%</div>
+                <div className="text-gray-300 text-sm">Average Efficiency Gain</div>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <div className="text-3xl font-bold text-white mb-2">500+</div>
+                <div className="text-gray-300 text-sm">Businesses Transformed</div>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                <div className="text-3xl font-bold text-white mb-2">24/7</div>
+                <div className="text-gray-300 text-sm">Support Available</div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
