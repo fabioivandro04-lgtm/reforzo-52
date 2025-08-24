@@ -61,10 +61,13 @@ const Hero = () => {
           className="absolute inset-0 bg-black w-full"
           style={{ y: backgroundY }}
         >
-          <img 
-            src="/lovable-uploads/a6a5233b-326c-4bb6-9745-7a84778df6ed.png" 
-            alt="Abstract geometric background" 
-            className={`w-full h-full object-cover opacity-70 grayscale ${isMobile ? 'object-right' : 'object-center'}`} 
+          <video 
+            src="https://nvpnweczvrhijljvrips.supabase.co/storage/v1/object/public/media/background%201.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={`w-full h-full object-cover opacity-70 ${isMobile ? 'object-right' : 'object-center'}`}
           />
           {/* Animated Gradient Overlay */}
           <motion.div 
