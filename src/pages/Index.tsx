@@ -33,7 +33,7 @@ const Index = () => {
       <Hero />
       
       {/* New Section */}
-      <section className="h-screen bg-transparent flex items-center relative overflow-hidden -mt-32">
+      <section className="h-screen bg-black flex items-center relative overflow-hidden">
         {/* Black Background Overlay */}
         <div className="absolute inset-0 bg-black" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
