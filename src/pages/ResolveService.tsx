@@ -322,9 +322,6 @@ const ResolveService = () => {
                       animation: visibleTimelineSteps.includes(0) ? 'wiggle 2s ease-in-out 1s infinite' : undefined
                     }} />
                   </div>
-                  <div className={`w-px h-16 bg-gradient-to-b from-slate-500 to-transparent mx-auto mt-4 transition-all duration-700 delay-300 ${
-                    visibleTimelineSteps.includes(0) ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
-                  }`}></div>
                 </div>
                 <div className="flex-1">
                   <h3 className={`text-2xl font-bold mb-3 transition-all duration-500 delay-200 ${
@@ -353,9 +350,6 @@ const ResolveService = () => {
                       animation: visibleTimelineSteps.includes(1) ? 'bounce 1s ease-out 0.5s both, spin 4s linear 2s infinite' : undefined
                     }} />
                   </div>
-                  <div className={`w-px h-16 bg-gradient-to-b from-gray-500 to-transparent mx-auto mt-4 transition-all duration-700 delay-300 ${
-                    visibleTimelineSteps.includes(1) ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
-                  }`}></div>
                 </div>
                 <div className="flex-1">
                   <h3 className={`text-2xl font-bold mb-3 transition-all duration-500 delay-200 ${
