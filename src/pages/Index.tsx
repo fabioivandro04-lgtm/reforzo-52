@@ -34,8 +34,6 @@ const Index = () => {
       
       {/* New Section */}
       <section className="h-screen bg-black flex items-center relative overflow-hidden">
-        {/* Black Background Overlay */}
-        <div className="absolute inset-0 bg-black" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
