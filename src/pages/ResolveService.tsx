@@ -268,63 +268,59 @@ const ResolveService = () => {
         </div>
       </section>
 
-      {/* How It Works - Interactive Card Flow */}
-      <section className="relative overflow-hidden bg-black text-white min-h-screen flex items-center">
-        {/* Animated background particles */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-teal-900/20"></div>
-        <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white/10 animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${Math.random() * 4 + 1}px`,
-                height: `${Math.random() * 4 + 1}px`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${Math.random() * 2 + 2}s`
-              }}
-            />
-          ))}
+      {/* How It Works - Professional Design */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-gray-50 min-h-screen flex items-center">
+        {/* Professional background with subtle patterns */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-100/30 via-white/50 to-gray-100/30"></div>
+        
+        {/* Subtle geometric patterns */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 border border-slate-300 rounded-full"></div>
+          <div className="absolute top-1/2 right-1/4 w-64 h-64 border border-gray-300 rounded-full"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-48 h-48 border border-slate-400 rounded-full"></div>
         </div>
+        
+        {/* Professional gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-slate-50/80"></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
-            {/* Floating title with neon effect */}
+            {/* Professional title */}
             <div className="text-center mb-20">
-              <h2 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent relative">
-                HOW IT
-                <span className="block text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]">WORKS</span>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+                How It
+                <span className="block text-slate-700 mt-2">Works</span>
               </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-slate-600 to-gray-600 mx-auto rounded-full"></div>
+              <p className="text-xl text-gray-600 mt-8 max-w-2xl mx-auto">
+                A streamlined approach to customer support automation
+              </p>
             </div>
             
-            {/* Interactive floating cards */}
-            <div ref={timelineRef} className="grid md:grid-cols-3 gap-8 perspective-1000">
+            {/* Professional cards layout */}
+            <div ref={timelineRef} className="grid md:grid-cols-3 gap-8">
               {/* Card 1 - Categorize */}
-              <div className={`group relative transform transition-all duration-1000 ${
+              <div className={`group relative transform transition-all duration-700 ${
                 visibleTimelineSteps.includes(0) 
-                  ? 'translate-y-0 opacity-100 rotate-0' 
-                  : 'translate-y-20 opacity-0 -rotate-6'
+                  ? 'translate-y-0 opacity-100' 
+                  : 'translate-y-10 opacity-0'
               }`}>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative bg-gradient-to-br from-blue-900/40 to-cyan-900/40 backdrop-blur-sm border border-blue-400/30 rounded-3xl p-8 hover:border-blue-400/60 transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_50px_rgba(59,130,246,0.3)]">
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500 group-hover:border-blue-200">
                   <div className="text-center mb-6">
-                    <div className="relative inline-block">
-                      <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-20"></div>
-                      <div className="relative w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto group-hover:rotate-12 transition-transform duration-500">
-                        <Tag className="w-10 h-10 text-white" />
+                    <div className="relative inline-block mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500">
+                        <Tag className="w-8 h-8 text-blue-600" />
                       </div>
                     </div>
-                    <div className="mt-4 text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">01</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">01</div>
+                    <div className="w-8 h-0.5 bg-blue-500 mx-auto rounded-full"></div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-center">Auto-Categorize</h3>
-                  <p className="text-gray-300 text-center leading-relaxed">
+                  <h3 className="text-xl font-bold mb-4 text-center text-gray-900">Auto-Categorize</h3>
+                  <p className="text-gray-600 text-center leading-relaxed">
                     AI instantly scans and tags your support emails by category, turning chaos into organized workflow.
                   </p>
                   <div className="mt-6 flex justify-center">
-                    <div className="px-4 py-2 bg-blue-500/20 rounded-full text-blue-300 text-sm font-medium">
+                    <div className="px-3 py-1 bg-blue-50 rounded-full text-blue-700 text-sm font-medium border border-blue-100">
                       Instant Tagging
                     </div>
                   </div>
@@ -332,28 +328,27 @@ const ResolveService = () => {
               </div>
               
               {/* Card 2 - Suggest Replies */}
-              <div className={`group relative transform transition-all duration-1000 delay-300 ${
+              <div className={`group relative transform transition-all duration-700 delay-300 ${
                 visibleTimelineSteps.includes(1) 
-                  ? 'translate-y-0 opacity-100 rotate-0' 
-                  : 'translate-y-20 opacity-0 rotate-6'
+                  ? 'translate-y-0 opacity-100' 
+                  : 'translate-y-10 opacity-0'
               }`}>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative bg-gradient-to-br from-purple-900/40 to-pink-900/40 backdrop-blur-sm border border-purple-400/30 rounded-3xl p-8 hover:border-purple-400/60 transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_50px_rgba(168,85,247,0.3)]">
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500 group-hover:border-purple-200">
                   <div className="text-center mb-6">
-                    <div className="relative inline-block">
-                      <div className="absolute inset-0 bg-purple-400 rounded-full animate-ping opacity-20"></div>
-                      <div className="relative w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto group-hover:rotate-12 transition-transform duration-500">
-                        <Edit3 className="w-10 h-10 text-white" />
+                    <div className="relative inline-block mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500">
+                        <Edit3 className="w-8 h-8 text-purple-600" />
                       </div>
                     </div>
-                    <div className="mt-4 text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">02</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">02</div>
+                    <div className="w-8 h-0.5 bg-purple-500 mx-auto rounded-full"></div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-center">Smart Replies</h3>
-                  <p className="text-gray-300 text-center leading-relaxed">
+                  <h3 className="text-xl font-bold mb-4 text-center text-gray-900">Smart Replies</h3>
+                  <p className="text-gray-600 text-center leading-relaxed">
                     Get instant, on-brand response suggestions for common questions. One-click solutions that save hours.
                   </p>
                   <div className="mt-6 flex justify-center">
-                    <div className="px-4 py-2 bg-purple-500/20 rounded-full text-purple-300 text-sm font-medium">
+                    <div className="px-3 py-1 bg-purple-50 rounded-full text-purple-700 text-sm font-medium border border-purple-100">
                       AI-Powered
                     </div>
                   </div>
@@ -361,28 +356,27 @@ const ResolveService = () => {
               </div>
               
               {/* Card 3 - Organize & Resolve */}
-              <div className={`group relative transform transition-all duration-1000 delay-600 ${
+              <div className={`group relative transform transition-all duration-700 delay-600 ${
                 visibleTimelineSteps.includes(2) 
-                  ? 'translate-y-0 opacity-100 rotate-0' 
-                  : 'translate-y-20 opacity-0 -rotate-6'
+                  ? 'translate-y-0 opacity-100' 
+                  : 'translate-y-10 opacity-0'
               }`}>
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative bg-gradient-to-br from-emerald-900/40 to-teal-900/40 backdrop-blur-sm border border-emerald-400/30 rounded-3xl p-8 hover:border-emerald-400/60 transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_50px_rgba(16,185,129,0.3)]">
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500 group-hover:border-emerald-200">
                   <div className="text-center mb-6">
-                    <div className="relative inline-block">
-                      <div className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-20"></div>
-                      <div className="relative w-20 h-20 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto group-hover:rotate-12 transition-transform duration-500">
-                        <CheckSquare className="w-10 h-10 text-white" />
+                    <div className="relative inline-block mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500">
+                        <CheckSquare className="w-8 h-8 text-emerald-600" />
                       </div>
                     </div>
-                    <div className="mt-4 text-4xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">03</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">03</div>
+                    <div className="w-8 h-0.5 bg-emerald-500 mx-auto rounded-full"></div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-center">Track & Resolve</h3>
-                  <p className="text-gray-300 text-center leading-relaxed">
+                  <h3 className="text-xl font-bold mb-4 text-center text-gray-900">Track & Resolve</h3>
+                  <p className="text-gray-600 text-center leading-relaxed">
                     Monitor request status, track response times, and ensure nothing falls through the cracks.
                   </p>
                   <div className="mt-6 flex justify-center">
-                    <div className="px-4 py-2 bg-emerald-500/20 rounded-full text-emerald-300 text-sm font-medium">
+                    <div className="px-3 py-1 bg-emerald-50 rounded-full text-emerald-700 text-sm font-medium border border-emerald-100">
                       Zero Drops
                     </div>
                   </div>
@@ -390,13 +384,13 @@ const ResolveService = () => {
               </div>
             </div>
             
-            {/* Connecting flow visualization */}
-            <div className="mt-16 flex justify-center items-center space-x-4 opacity-60">
-              <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
-              <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-purple-400 to-emerald-400"></div>
-              <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+            {/* Professional connecting flow */}
+            <div className="mt-16 flex justify-center items-center space-x-4">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-purple-500 to-emerald-500"></div>
+              <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
             </div>
           </div>
         </div>
