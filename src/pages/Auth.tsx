@@ -61,9 +61,11 @@ const Auth = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <Link to="/" className="inline-block mb-4">
-            <span className="text-2xl font-bold text-gray-900 hover:text-primary transition-colors">
-              Reforzo
-            </span>
+            <img 
+              src="/lovable-uploads/3841b91f-6deb-4b58-849b-267bbd7cbed4.png" 
+              alt="Reforzo Logo" 
+              className="h-12 w-auto hover:scale-105 transition-transform"
+            />
           </Link>
           <CardTitle>Client Login</CardTitle>
           <CardDescription>
