@@ -65,7 +65,7 @@ const Auth = () => {
               <img 
                 src="/lovable-uploads/85295fab-5654-420c-b051-efeeb126f374.png" 
                 alt="Reforzo Logo" 
-                className="h-12 w-auto hover:scale-105 transition-transform"
+                className="h-12 w-auto animate-fade-in hover:scale-110 transition-all duration-300 ease-out"
               />
             </Link>
           </div>
