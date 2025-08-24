@@ -4,6 +4,44 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Tag, Edit3, CheckSquare, Zap, Folder, MessageSquare, BarChart3, ArrowRight, Mail, Users, Clock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+const AnimatedCounter = ({ target, suffix = '', delay = 0 }: { target: number; suffix?: string; delay?: number }) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasStarted(true);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = target / steps;
+    const stepDuration = duration / steps;
+
+    let currentStep = 0;
+    const timer = setInterval(() => {
+      currentStep++;
+      if (currentStep >= steps) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(increment * currentStep));
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, [target, hasStarted]);
+
+  return <span>{count}{suffix}</span>;
+};
 
 const ResolveService = () => {
   return (
@@ -86,7 +124,9 @@ const ResolveService = () => {
               </p>
               <div className="flex items-center space-x-6">
                 <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
-                  <div className="text-3xl font-bold text-slate-700 hover:scale-110 transition-transform duration-300">90%</div>
+                  <div className="text-3xl font-bold text-slate-700 hover:scale-110 transition-transform duration-300">
+                    <AnimatedCounter target={90} suffix="%" delay={200} />
+                  </div>
                   <div className="text-sm text-gray-500">Faster Responses</div>
                 </div>
                 <div className="text-center animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
