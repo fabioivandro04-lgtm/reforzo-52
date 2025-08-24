@@ -13,12 +13,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-transparent border-b border-border/20 transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-black border-b border-gray-800 transition-all duration-300">
       <div className="container mx-auto px-2 md:px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-semibold text-foreground">Reforzo</span>
+            <span className="text-xl font-semibold text-white">Reforzo</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -33,7 +33,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
                 {item.name}
               </Link>
@@ -45,19 +45,19 @@ const Navbar = () => {
             {!loading && (
               user ? (
                 <div className="flex items-center space-x-3">
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <div className="w-7 h-7 bg-muted rounded-full flex items-center justify-center">
-                      <User size={14} />
+                  <div className="flex items-center space-x-2 text-sm text-gray-300">
+                    <div className="w-7 h-7 bg-gray-700 rounded-full flex items-center justify-center">
+                      <User size={14} className="text-gray-300" />
                     </div>
-                    <span className="font-medium">{user.email?.split('@')[0]}</span>
+                    <span className="font-medium text-white">{user.email?.split('@')[0]}</span>
                   </div>
-                  <Button variant="outline" size="sm" onClick={signOut}>
+                  <Button variant="outline" size="sm" onClick={signOut} className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white">
                     <LogOut size={14} className="mr-1.5" />
                     Sign Out
                   </Button>
                 </div>
               ) : (
-                <Button asChild size="sm">
+                <Button asChild size="sm" className="bg-white text-black hover:bg-gray-200">
                   <Link to="/auth">Sign In</Link>
                 </Button>
               )
@@ -70,7 +70,7 @@ const Navbar = () => {
               variant="ghost"
               size="sm"
               onClick={toggleMenu}
-              className="p-2"
+              className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
@@ -80,7 +80,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
+        <div className="md:hidden border-t border-gray-800 bg-black">
           <div className="px-4 py-4 space-y-2">
             {[
               { name: 'Home', path: '/' },
@@ -92,7 +92,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
@@ -100,17 +100,17 @@ const Navbar = () => {
             ))}
             
             {/* Mobile Auth */}
-            <div className="pt-4 mt-4 border-t border-border">
+            <div className="pt-4 mt-4 border-t border-gray-800">
               {!loading && (
                 user ? (
                   <div className="space-y-3">
-                    <div className="flex items-center space-x-3 px-3 py-2 bg-muted rounded-md">
-                      <div className="w-8 h-8 bg-muted-foreground/20 rounded-full flex items-center justify-center">
-                        <User size={14} />
+                    <div className="flex items-center space-x-3 px-3 py-2 bg-gray-800 rounded-md">
+                      <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                        <User size={14} className="text-gray-300" />
                       </div>
                       <div>
-                        <div className="text-sm font-medium">{user.email?.split('@')[0]}</div>
-                        <div className="text-xs text-muted-foreground">Signed in</div>
+                        <div className="text-sm font-medium text-white">{user.email?.split('@')[0]}</div>
+                        <div className="text-xs text-gray-400">Signed in</div>
                       </div>
                     </div>
                     <Button
@@ -120,14 +120,14 @@ const Navbar = () => {
                         signOut();
                         setIsMenuOpen(false);
                       }}
-                      className="w-full justify-start"
+                      className="w-full justify-start border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white"
                     >
                       <LogOut size={16} className="mr-2" />
                       Sign Out
                     </Button>
                   </div>
                 ) : (
-                  <Button asChild size="sm" className="w-full">
+                  <Button asChild size="sm" className="w-full bg-white text-black hover:bg-gray-200">
                     <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                       Sign In
                     </Link>
