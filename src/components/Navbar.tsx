@@ -41,7 +41,7 @@ const Navbar = () => {
           >
             <Link to="/" className="flex items-center space-x-2 group">
               <motion.span 
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 tracking-tight transition-colors duration-300"
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 tracking-tight transition-colors duration-300 text-left"
                 whileHover={{ 
                   color: "#374151",
                   letterSpacing: "0.025em"
