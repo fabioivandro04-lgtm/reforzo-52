@@ -48,10 +48,12 @@ const ResolveService = () => {
   const benefitsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const whoForRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [visibleBenefits, setVisibleBenefits] = useState<number[]>([]);
   const [ctaVisible, setCtaVisible] = useState(false);
   const [whoForVisible, setWhoForVisible] = useState(false);
+  const [visibleTimelineSteps, setVisibleTimelineSteps] = useState<number[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -121,6 +123,27 @@ const ResolveService = () => {
     if (whoForRef.current) {
       observer.observe(whoForRef.current);
     }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const timelineSteps = timelineRef.current?.querySelectorAll('.timeline-step');
+    if (!timelineSteps) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-step') || '0');
+            setVisibleTimelineSteps(prev => [...new Set([...prev, index])]);
+          }
+        });
+      },
+      { threshold: 0.4, rootMargin: '-50px' }
+    );
+
+    timelineSteps.forEach((step) => observer.observe(step));
 
     return () => observer.disconnect();
   }, []);
@@ -253,46 +276,74 @@ const ResolveService = () => {
               How Re:Solve <span className="text-slate-700">Works</span> in Your Inbox
             </h2>
             
-            <div className="space-y-12">
-              <div className="flex items-start space-x-8">
+            <div ref={timelineRef} className="space-y-12">
+              <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 ${
+                visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`} data-step="0">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-r from-slate-600 to-slate-500 rounded-full flex items-center justify-center">
+                  <div className={`w-16 h-16 bg-gradient-to-r from-slate-600 to-slate-500 rounded-full flex items-center justify-center transform transition-all duration-500 ${
+                    visibleTimelineSteps.includes(0) ? 'scale-100 animate-pulse-slow' : 'scale-75'
+                  }`}>
                     <Tag className="w-8 h-8 text-white" />
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-slate-500 to-transparent mx-auto mt-4"></div>
+                  <div className={`w-px h-16 bg-gradient-to-b from-slate-500 to-transparent mx-auto mt-4 transition-all duration-700 delay-300 ${
+                    visibleTimelineSteps.includes(0) ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
+                  }`}></div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-3">1. Automatically Categorize</h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <h3 className={`text-2xl font-bold mb-3 transition-all duration-500 delay-200 ${
+                    visibleTimelineSteps.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  }`}>1. Automatically Categorize</h3>
+                  <p className={`text-gray-300 text-lg leading-relaxed transition-all duration-500 delay-400 ${
+                    visibleTimelineSteps.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  }`}>
                     Re:Solve scans incoming support emails and instantly tags them by type (e.g., "Billing," "Feature Request," "Bug").
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-8">
+              <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 delay-200 ${
+                visibleTimelineSteps.includes(1) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} data-step="1">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full flex items-center justify-center">
+                  <div className={`w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full flex items-center justify-center transform transition-all duration-500 ${
+                    visibleTimelineSteps.includes(1) ? 'scale-100 animate-pulse-slow' : 'scale-75'
+                  }`}>
                     <Edit3 className="w-8 h-8 text-white" />
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-gray-500 to-transparent mx-auto mt-4"></div>
+                  <div className={`w-px h-16 bg-gradient-to-b from-gray-500 to-transparent mx-auto mt-4 transition-all duration-700 delay-300 ${
+                    visibleTimelineSteps.includes(1) ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
+                  }`}></div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-3">2. Suggest Instant Replies</h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <h3 className={`text-2xl font-bold mb-3 transition-all duration-500 delay-200 ${
+                    visibleTimelineSteps.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  }`}>2. Suggest Instant Replies</h3>
+                  <p className={`text-gray-300 text-lg leading-relaxed transition-all duration-500 delay-400 ${
+                    visibleTimelineSteps.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  }`}>
                     For common questions, it suggests one-click, on-brand responses that you can send instantly or customize.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-8">
+              <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 delay-400 ${
+                visibleTimelineSteps.includes(2) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`} data-step="2">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-full flex items-center justify-center">
+                  <div className={`w-16 h-16 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-full flex items-center justify-center transform transition-all duration-500 ${
+                    visibleTimelineSteps.includes(2) ? 'scale-100 animate-pulse-slow' : 'scale-75'
+                  }`}>
                     <CheckSquare className="w-8 h-8 text-white" />
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-3">3. Organize & Resolve</h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <h3 className={`text-2xl font-bold mb-3 transition-all duration-500 delay-200 ${
+                    visibleTimelineSteps.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  }`}>3. Organize & Resolve</h3>
+                  <p className={`text-gray-300 text-lg leading-relaxed transition-all duration-500 delay-400 ${
+                    visibleTimelineSteps.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  }`}>
                     Track the status of each request, set reminders for follow-ups, and mark tickets as solved—all within Gmail.
                   </p>
                 </div>
