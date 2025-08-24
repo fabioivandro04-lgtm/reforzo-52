@@ -513,20 +513,6 @@ const TheSignal = () => {
           <motion.div variants={itemVariants} className="space-y-8">
 
 
-            <Card className="p-8 border-slate-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <CheckSquare className="w-5 h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Consider Your Audience</h3>
-                  <p className="text-slate-600">
-                    A name like "The Signal Report" feels more corporate and serious. 
-                    "Boosting The Signal" feels more community-oriented and niche.
-                  </p>
-                </div>
-              </div>
-            </Card>
 
             <Card className="p-8 border-l-4 border-l-blue-500 bg-blue-50">
               <h3 className="text-lg font-semibold text-slate-900 mb-3">Final Thought</h3>
