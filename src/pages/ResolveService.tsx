@@ -311,16 +311,12 @@ const ResolveService = () => {
                 visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`} data-step="0">
                 <div className="flex-shrink-0">
-                  <div className={`w-16 h-16 bg-gradient-to-r from-slate-600 to-slate-500 rounded-full flex items-center justify-center transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-slate-500/50 ${
-                    visibleTimelineSteps.includes(0) ? 'scale-100 animate-pulse-slow' : 'scale-75'
-                  }`} style={{
-                    animation: visibleTimelineSteps.includes(0) ? 'pulse 2s ease-in-out infinite, float 3s ease-in-out infinite' : undefined
-                  }}>
-                    <Tag className={`w-8 h-8 text-white transition-all duration-700 hover:rotate-12 hover:scale-110 ${
-                      visibleTimelineSteps.includes(0) ? 'rotate-0 scale-100' : 'rotate-45 scale-75'
-                    }`} style={{
-                      animation: visibleTimelineSteps.includes(0) ? 'wiggle 2s ease-in-out 1s infinite' : undefined
-                    }} />
+                  <div className={`w-16 h-16 bg-gradient-to-r from-slate-600 to-slate-500 rounded-full flex items-center justify-center transform transition-all duration-500 hover:scale-105 hover:shadow-lg ${
+                    visibleTimelineSteps.includes(0) ? 'scale-100 opacity-100' : 'scale-90 opacity-60'
+                  }`}>
+                    <Tag className={`w-8 h-8 text-white transition-all duration-500 ${
+                      visibleTimelineSteps.includes(0) ? 'scale-100 opacity-100' : 'scale-75 opacity-70'
+                    }`} />
                   </div>
                 </div>
                 <div className="flex-1">
@@ -339,16 +335,12 @@ const ResolveService = () => {
                 visibleTimelineSteps.includes(1) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`} data-step="1">
                 <div className="flex-shrink-0">
-                  <div className={`w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full flex items-center justify-center transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-gray-500/50 hover:rotate-3 ${
-                    visibleTimelineSteps.includes(1) ? 'scale-100 animate-pulse-slow' : 'scale-75'
-                  }`} style={{
-                    animation: visibleTimelineSteps.includes(1) ? 'pulse 2s ease-in-out infinite, float 3s ease-in-out 1s infinite' : undefined
-                  }}>
-                    <Edit3 className={`w-8 h-8 text-white transition-all duration-700 hover:scale-125 hover:-rotate-6 ${
-                      visibleTimelineSteps.includes(1) ? 'scale-100 opacity-100' : 'scale-0 opacity-50'
-                    }`} style={{
-                      animation: visibleTimelineSteps.includes(1) ? 'bounce 1s ease-out 0.5s both, spin 4s linear 2s infinite' : undefined
-                    }} />
+                  <div className={`w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full flex items-center justify-center transform transition-all duration-500 hover:scale-105 hover:shadow-lg ${
+                    visibleTimelineSteps.includes(1) ? 'scale-100 opacity-100' : 'scale-90 opacity-60'
+                  }`}>
+                    <Edit3 className={`w-8 h-8 text-white transition-all duration-500 ${
+                      visibleTimelineSteps.includes(1) ? 'scale-100 opacity-100' : 'scale-75 opacity-70'
+                    }`} />
                   </div>
                 </div>
                 <div className="flex-1">
@@ -367,16 +359,12 @@ const ResolveService = () => {
                 visibleTimelineSteps.includes(2) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`} data-step="2">
                 <div className="flex-shrink-0">
-                  <div className={`w-16 h-16 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-full flex items-center justify-center transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-emerald-500/50 hover:-rotate-2 ${
-                    visibleTimelineSteps.includes(2) ? 'scale-100 animate-pulse-slow' : 'scale-75'
-                  }`} style={{
-                    animation: visibleTimelineSteps.includes(2) ? 'pulse 2s ease-in-out infinite, float 3s ease-in-out 2s infinite' : undefined
-                  }}>
-                    <CheckSquare className={`w-8 h-8 text-white transition-all duration-700 hover:scale-110 hover:rotate-3 ${
-                      visibleTimelineSteps.includes(2) ? 'scale-100 opacity-100' : 'scale-50 opacity-30'
-                    }`} style={{
-                      animation: visibleTimelineSteps.includes(2) ? 'pulse 1.5s ease-in-out 0.7s infinite, wiggle 3s ease-in-out 2s infinite' : undefined
-                    }} />
+                  <div className={`w-16 h-16 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-full flex items-center justify-center transform transition-all duration-500 hover:scale-105 hover:shadow-lg ${
+                    visibleTimelineSteps.includes(2) ? 'scale-100 opacity-100' : 'scale-90 opacity-60'
+                  }`}>
+                    <CheckSquare className={`w-8 h-8 text-white transition-all duration-500 ${
+                      visibleTimelineSteps.includes(2) ? 'scale-100 opacity-100' : 'scale-75 opacity-70'
+                    }`} />
                   </div>
                 </div>
                 <div className="flex-1">
