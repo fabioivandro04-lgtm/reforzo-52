@@ -31,7 +31,7 @@ const Navbar = () => {
     }}
   >
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
-        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18 w-full">
           {/* Logo - Responsive sizing */}
           <motion.div 
             className="flex-shrink-0"
