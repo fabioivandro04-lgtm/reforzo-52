@@ -7,6 +7,7 @@ import Projects from '@/components/Projects';
 import WhyWrlds from '@/components/WhyWrlds';
 import BlogPreview from '@/components/BlogPreview';
 import SEO from '@/components/SEO';
+import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { useEffect } from 'react';
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
 
   return (
     <PageLayout showContact={false}>
+      <ScrollProgressBar />
       <SEO 
         title="Reforzo - Reinforce your business" 
         description="Use innovative metrics to evolve and modernize your business. Reforzo helps SMEs and corporations achieve measurable operational excellence through integrated people, processes, and technology."
