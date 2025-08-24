@@ -50,7 +50,7 @@ const Footer = () => {
       setIsSubmitting(false);
     }
   };
-  return <footer id="contact" className="bg-black text-white pt-16 pb-8 w-full">
+  return <footer id="contact" className="bg-black text-white pt-8 pb-4 w-full">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         
         
