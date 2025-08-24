@@ -33,16 +33,16 @@ const Index = () => {
       <Hero />
       
       {/* New Section */}
-      <section className="h-screen bg-white flex items-center relative overflow-hidden">
+      <section className="h-screen bg-transparent flex items-center relative overflow-hidden -mt-32">
         {/* Fade Effect Overlay */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-white/95"
-          initial={{ opacity: 0.7 }}
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent"
+          initial={{ opacity: 0.3 }}
           animate={{ 
-            opacity: [0.7, 0.85, 0.7],
+            opacity: [0.3, 0.1, 0.3],
           }}
           transition={{ 
-            duration: 6, 
+            duration: 8, 
             repeat: Infinity, 
             ease: [0.4, 0, 0.2, 1],
             repeatType: "reverse"
