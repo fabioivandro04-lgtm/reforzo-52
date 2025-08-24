@@ -294,15 +294,15 @@ const ResolveService = () => {
               </div>
               
               {/* Second connector dots */}
-              <div className="absolute left-8 top-60 flex flex-col items-center space-y-2">
+              <div className="absolute left-8 top-56 flex flex-col items-center space-y-2">
                 {[0, 1, 2].map((i) => (
                   <div
                     key={i}
                     className={`w-1 h-1 bg-emerald-400 rounded-full transition-all duration-500 ${
-                      visibleTimelineSteps.includes(1) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                      visibleTimelineSteps.includes(1) && visibleTimelineSteps.includes(2) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
                     }`}
                     style={{
-                      transitionDelay: visibleTimelineSteps.includes(1) ? `${i * 200}ms` : '0ms'
+                      transitionDelay: (visibleTimelineSteps.includes(1) && visibleTimelineSteps.includes(2)) ? `${i * 200}ms` : '0ms'
                     }}
                   />
                 ))}
