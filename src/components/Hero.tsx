@@ -109,6 +109,23 @@ const Hero = () => {
               >
                 Use innovative metrics to evolve and modernize your business
               </motion.p>
+              
+              <motion.div 
+                className="mt-6 sm:mt-8 max-w-2xl mx-auto"
+                variants={itemVariants}
+              >
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl">
+                  <iframe 
+                    src="https://www.youtube.com/embed/W095v57us18"
+                    title="Reforzo Business Video"
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </motion.div>
+              
               <motion.div 
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center items-center" 
                 variants={itemVariants}
