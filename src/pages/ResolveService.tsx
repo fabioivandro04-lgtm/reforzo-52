@@ -269,8 +269,8 @@ const ResolveService = () => {
       </section>
 
       {/* How It Works - Vertical Timeline */}
-      <section className="relative bg-gradient-to-b from-gray-50 via-gray-900 to-gray-50 text-white">
-        <div className="py-24 bg-gray-900/95">
+      <section className="relative bg-gradient-to-b from-white via-gray-900 to-gray-50 text-white">
+        <div className="py-24 bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
