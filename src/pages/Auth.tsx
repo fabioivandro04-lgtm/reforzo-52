@@ -119,7 +119,7 @@ const Auth = () => {
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-primary hover:text-primary-foreground hover:bg-transparent hover:underline font-medium border-none"
+                className="text-primary hover:text-primary hover:underline hover:bg-transparent font-medium border-none focus:outline-none focus:ring-0"
               >
                 <Link to="/business-assessment">Request Client Account</Link>
               </Button>
