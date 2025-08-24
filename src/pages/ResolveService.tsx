@@ -284,7 +284,9 @@ const ResolveService = () => {
                   <div className={`w-16 h-16 bg-gradient-to-r from-slate-600 to-slate-500 rounded-full flex items-center justify-center transform transition-all duration-500 ${
                     visibleTimelineSteps.includes(0) ? 'scale-100 animate-pulse-slow' : 'scale-75'
                   }`}>
-                    <Tag className="w-8 h-8 text-white" />
+                    <Tag className={`w-8 h-8 text-white transition-all duration-700 ${
+                      visibleTimelineSteps.includes(0) ? 'rotate-0 scale-100' : 'rotate-45 scale-75'
+                    }`} />
                   </div>
                   <div className={`w-px h-16 bg-gradient-to-b from-slate-500 to-transparent mx-auto mt-4 transition-all duration-700 delay-300 ${
                     visibleTimelineSteps.includes(0) ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
@@ -309,7 +311,11 @@ const ResolveService = () => {
                   <div className={`w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full flex items-center justify-center transform transition-all duration-500 ${
                     visibleTimelineSteps.includes(1) ? 'scale-100 animate-pulse-slow' : 'scale-75'
                   }`}>
-                    <Edit3 className="w-8 h-8 text-white" />
+                    <Edit3 className={`w-8 h-8 text-white transition-all duration-700 ${
+                      visibleTimelineSteps.includes(1) ? 'scale-100 opacity-100' : 'scale-0 opacity-50'
+                    }`} style={{
+                      animation: visibleTimelineSteps.includes(1) ? 'bounce 1s ease-out 0.5s both' : undefined
+                    }} />
                   </div>
                   <div className={`w-px h-16 bg-gradient-to-b from-gray-500 to-transparent mx-auto mt-4 transition-all duration-700 delay-300 ${
                     visibleTimelineSteps.includes(1) ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
@@ -334,7 +340,11 @@ const ResolveService = () => {
                   <div className={`w-16 h-16 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-full flex items-center justify-center transform transition-all duration-500 ${
                     visibleTimelineSteps.includes(2) ? 'scale-100 animate-pulse-slow' : 'scale-75'
                   }`}>
-                    <CheckSquare className="w-8 h-8 text-white" />
+                    <CheckSquare className={`w-8 h-8 text-white transition-all duration-700 ${
+                      visibleTimelineSteps.includes(2) ? 'scale-100 opacity-100' : 'scale-50 opacity-30'
+                    }`} style={{
+                      animation: visibleTimelineSteps.includes(2) ? 'pulse 1.5s ease-in-out 0.7s infinite' : undefined
+                    }} />
                   </div>
                 </div>
                 <div className="flex-1">
