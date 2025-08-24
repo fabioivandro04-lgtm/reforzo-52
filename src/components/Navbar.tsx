@@ -7,20 +7,8 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { Button } from "@/components/ui/button";
 import { useAuth } from '@/hooks/useAuth';
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut, loading } = useAuth();
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -34,10 +22,7 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
   return <motion.nav 
-    className={cn(
-      "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out",
-      isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
-    )} 
+    className="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-lg transition-all duration-500 ease-in-out" 
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ 
@@ -50,14 +35,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center w-1/3">
             <Link to="/" className="flex items-center justify-start group">
               <motion.span 
-                className={cn(
-                  "text-2xl font-bold tracking-tight cursor-pointer",
-                  "transition-all duration-500 ease-out",
-                  "hover:scale-110 hover:tracking-wide",
-                  "group-hover:drop-shadow-lg",
-                  "transform hover:-translate-y-0.5",
-                  isScrolled ? "text-gray-900 hover:text-primary" : "text-white hover:text-primary-foreground"
-                )}
+                className="text-2xl font-bold tracking-tight cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:tracking-wide group-hover:drop-shadow-lg transform hover:-translate-y-0.5 text-gray-900 hover:text-primary"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
@@ -79,11 +57,11 @@ const Navbar = () => {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex w-1/3 justify-end">
-            <NavigationMenu className={cn(isScrolled ? "" : "text-white")}>
+            <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link to="/" className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                    <Link to="/" className={cn(navigationMenuTriggerStyle(), "text-gray-700 hover:text-gray-900")}>
                       Home
                     </Link>
                   </NavigationMenuLink>
@@ -91,14 +69,14 @@ const Navbar = () => {
                 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link to="/about" className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                    <Link to="/about" className={cn(navigationMenuTriggerStyle(), "text-gray-700 hover:text-gray-900")}>
                       About Us
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={cn(isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                  <NavigationMenuTrigger className="text-gray-700 hover:text-gray-900">
                     Services
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg z-50">
@@ -151,7 +129,7 @@ const Navbar = () => {
                 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link to="/methodology" className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                    <Link to="/methodology" className={cn(navigationMenuTriggerStyle(), "text-gray-700 hover:text-gray-900")}>
                       Methodology
                     </Link>
                   </NavigationMenuLink>
@@ -159,7 +137,7 @@ const Navbar = () => {
                 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link to="/news" className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                    <Link to="/news" className={cn(navigationMenuTriggerStyle(), "text-gray-700 hover:text-gray-900")}>
                       News
                     </Link>
                   </NavigationMenuLink>
@@ -167,7 +145,7 @@ const Navbar = () => {
                 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link to="/careers" className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                    <Link to="/careers" className={cn(navigationMenuTriggerStyle(), "text-gray-700 hover:text-gray-900")}>
                       Careers
                     </Link>
                   </NavigationMenuLink>
@@ -180,7 +158,7 @@ const Navbar = () => {
               {!loading && (
                 user ? (
                   <div className="flex items-center space-x-2">
-                    <div className={cn("flex items-center space-x-1", isScrolled ? "text-gray-700" : "text-white")}>
+                    <div className="flex items-center space-x-1 text-gray-700">
                       <User size={16} />
                       <span className="text-sm">{user.email?.split('@')[0]}</span>
                     </div>
@@ -188,12 +166,7 @@ const Navbar = () => {
                       variant="outline"
                       size="sm"
                       onClick={signOut}
-                      className={cn(
-                        "flex items-center space-x-1",
-                        isScrolled 
-                          ? "border-gray-300 text-gray-700 hover:bg-gray-50" 
-                          : "border-gray-300 text-gray-700 hover:bg-white"
-                      )}
+                      className="flex items-center space-x-1 border-gray-300 text-gray-700 hover:bg-gray-50"
                     >
                       <LogOut size={14} />
                       <span>Sign Out</span>
@@ -204,11 +177,7 @@ const Navbar = () => {
                     asChild
                     variant="outline"
                     size="sm"
-                    className={cn(
-                      isScrolled 
-                        ? "border-gray-300 text-gray-700 hover:bg-gray-50" 
-                        : "border-white text-white hover:bg-white hover:text-gray-900"
-                    )}
+                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
                   >
                     <Link to="/auth">Sign In</Link>
                   </Button>
@@ -219,7 +188,7 @@ const Navbar = () => {
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button onClick={toggleMenu} className={cn("focus:outline-none", isScrolled ? "text-gray-700" : "text-white")}>
+            <button onClick={toggleMenu} className="focus:outline-none text-gray-700">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -241,59 +210,56 @@ const Navbar = () => {
         }}
       >
         <motion.div 
-          className={cn(
-            "px-3 pt-2 pb-3 space-y-1 shadow-lg overflow-y-auto max-h-80 transition-colors duration-500",
-            isScrolled ? "bg-white/95 backdrop-blur-md" : "bg-black/95 backdrop-blur-md"
-          )}
+          className="px-3 pt-2 pb-3 space-y-1 shadow-lg overflow-y-auto max-h-80 transition-colors duration-500 bg-white/95 backdrop-blur-md"
           variants={{
             open: { y: 0 },
             closed: { y: -20 }
           }}
           transition={{ duration: 0.3, delay: 0.1 }}
         >
-          <Link to="/" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
             Home
           </Link>
           
-          <Link to="/about" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/about" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
             About Us
           </Link>
           
-          <Link to="/business-assessment" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/business-assessment" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
             Services
           </Link>
           
-          <Link to="/methodology" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/methodology" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
             Methodology
           </Link>
           
-          <Link to="/news" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/news" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
             News
           </Link>
           
-          <Link to="/careers" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/careers" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
             Careers
           </Link>
           
-          <Link to="/business-assessment" className={cn("block px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 bg-gray-200 hover:bg-gray-300" : "text-white bg-gray-700 hover:bg-gray-600")} onClick={() => {
+          <Link to="/business-assessment" className="block px-3 py-1.5 rounded-md text-sm text-gray-700 bg-gray-200 hover:bg-gray-300" onClick={() => {
           setIsMenuOpen(false);
           window.scrollTo(0, 0);
         }}>
@@ -304,7 +270,7 @@ const Navbar = () => {
           {!loading && (
             user ? (
               <div className="space-y-2 pt-2 border-t border-gray-200">
-                <div className={cn("px-3 py-1.5 text-sm", isScrolled ? "text-gray-600" : "text-gray-300")}>
+                <div className="px-3 py-1.5 text-sm text-gray-600">
                   {user.email}
                 </div>
                 <button
@@ -312,7 +278,7 @@ const Navbar = () => {
                     signOut();
                     setIsMenuOpen(false);
                   }}
-                  className={cn("block w-full text-left px-3 py-1.5 rounded-md text-sm", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")}
+                  className="block w-full text-left px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50"
                 >
                   Sign Out
                 </button>
@@ -320,7 +286,7 @@ const Navbar = () => {
             ) : (
               <Link 
                 to="/auth" 
-                className={cn("block px-3 py-1.5 rounded-md text-sm font-medium", isScrolled ? "text-gray-700 bg-gray-200 hover:bg-gray-300" : "text-white bg-blue-600 hover:bg-blue-700")} 
+                className="block px-3 py-1.5 rounded-md text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300" 
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
