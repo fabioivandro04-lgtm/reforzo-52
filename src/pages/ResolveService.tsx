@@ -277,23 +277,35 @@ const ResolveService = () => {
             </h2>
             
             <div ref={timelineRef} className="space-y-12 relative">
-              {/* Clean segmented connecting lines */}
-              {/* First segment: Icon 1 to Icon 2 */}
-              <div className={`absolute left-8 top-24 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
-                visibleTimelineSteps.includes(0) ? 'h-24' : 'h-0'
-              }`}>
-                <div className={`w-0.5 bg-slate-400 transition-all duration-1200 delay-300 ${
-                  visibleTimelineSteps.includes(1) ? 'h-full' : 'h-0'
-                }`}></div>
+              {/* Clean dotted connectors */}
+              {/* First connector dots */}
+              <div className="absolute left-8 top-24 flex flex-col items-center space-y-2">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className={`w-1 h-1 bg-slate-400 rounded-full transition-all duration-500 ${
+                      visibleTimelineSteps.includes(0) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                    }`}
+                    style={{
+                      transitionDelay: visibleTimelineSteps.includes(0) ? `${i * 200}ms` : '0ms'
+                    }}
+                  />
+                ))}
               </div>
               
-              {/* Second segment: Icon 2 to Icon 3 */}
-              <div className={`absolute left-8 top-64 w-0.5 bg-slate-300 transition-all duration-1000 ease-out ${
-                visibleTimelineSteps.includes(1) ? 'h-24' : 'h-0'
-              }`}>
-                <div className={`w-0.5 bg-emerald-400 transition-all duration-1200 delay-500 ${
-                  visibleTimelineSteps.includes(2) ? 'h-full' : 'h-0'
-                }`}></div>
+              {/* Second connector dots */}
+              <div className="absolute left-8 top-60 flex flex-col items-center space-y-2">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className={`w-1 h-1 bg-emerald-400 rounded-full transition-all duration-500 ${
+                      visibleTimelineSteps.includes(1) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                    }`}
+                    style={{
+                      transitionDelay: visibleTimelineSteps.includes(1) ? `${i * 200}ms` : '0ms'
+                    }}
+                  />
+                ))}
               </div>
               <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 ${
                 visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
