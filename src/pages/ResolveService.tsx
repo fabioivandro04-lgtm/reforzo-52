@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Tag, Edit3, CheckSquare, Zap, Folder, MessageSquare, BarChart3, ArrowRight, Mail, Users, Clock } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const AnimatedCounter = ({ target, suffix = '', delay = 0 }: { target: number; suffix?: string; delay?: number }) => {
   const [count, setCount] = useState(0);
@@ -44,6 +44,25 @@ const AnimatedCounter = ({ target, suffix = '', delay = 0 }: { target: number; s
 };
 
 const ResolveService = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <PageLayout>
       <SEO 
@@ -268,7 +287,9 @@ const ResolveService = () => {
 
       {/* Benefits - Side-by-side Cards */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+        <div ref={sectionRef} className={`container mx-auto px-4 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-16">
               Why Use <span className="text-slate-700">Re:Solve?</span>
@@ -325,10 +346,14 @@ const ResolveService = () => {
       <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className={`text-4xl md:text-5xl font-bold mb-6 transition-all duration-700 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>
               Perfect <span className="text-slate-700">For:</span>
             </h2>
-            <p className="text-xl text-gray-300 mb-12">Teams that value simplicity without sacrificing power</p>
+            <p className={`text-xl text-gray-300 mb-12 transition-all duration-700 delay-400 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}>Teams that value simplicity without sacrificing power</p>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
@@ -339,7 +364,13 @@ const ResolveService = () => {
                 "Service businesses managing client communications",
                 "Any team wanting simpler support without complexity"
               ].map((item, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div 
+                  key={index} 
+                  className={`bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${600 + index * 100}ms` }}
+                >
                   <div className="flex items-center space-x-3">
                     <div className="w-6 h-6 bg-slate-500 rounded-full flex items-center justify-center flex-shrink-0">
                       <Check className="w-4 h-4 text-white" />
