@@ -47,9 +47,11 @@ const ResolveService = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const benefitsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const whoForRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [visibleBenefits, setVisibleBenefits] = useState<number[]>([]);
   const [ctaVisible, setCtaVisible] = useState(false);
+  const [whoForVisible, setWhoForVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -101,6 +103,23 @@ const ResolveService = () => {
 
     if (ctaRef.current) {
       observer.observe(ctaRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWhoForVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (whoForRef.current) {
+      observer.observe(whoForRef.current);
     }
 
     return () => observer.disconnect();
@@ -392,15 +411,17 @@ const ResolveService = () => {
 
       {/* Who It's For - Modern Grid */}
       <section className="py-20 bg-gray-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+        <div ref={whoForRef} className="container mx-auto px-4">
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
+            whoForVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
             <h2 className={`text-4xl md:text-5xl font-bold mb-6 transition-all duration-700 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}>
               Perfect <span className="text-slate-700">For:</span>
             </h2>
             <p className={`text-xl text-gray-300 mb-12 transition-all duration-700 delay-400 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              whoForVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}>Teams that value simplicity without sacrificing power</p>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -414,13 +435,18 @@ const ResolveService = () => {
               ].map((item, index) => (
                 <div 
                   key={index} 
-                  className={`bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-700 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  className={`bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transform transition-all duration-700 hover:scale-105 hover:-translate-y-2 ${
+                    whoForVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'
                   }`}
-                  style={{ transitionDelay: `${600 + index * 100}ms` }}
+                  style={{ 
+                    transitionDelay: whoForVisible ? `${600 + index * 150}ms` : '0ms',
+                    animationFillMode: 'both'
+                  }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-slate-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className={`w-6 h-6 bg-slate-500 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
+                      whoForVisible ? 'animate-pulse-slow' : ''
+                    }`}>
                       <Check className="w-4 h-4 text-white" />
                     </div>
                     <span className="text-left">{item}</span>
