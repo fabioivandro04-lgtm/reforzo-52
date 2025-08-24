@@ -43,3 +43,15 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Responsive Hero Typography */
+.banner-title {
+  font-size: clamp(2rem, 8vw, 5rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.banner-subtitle {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  line-height: 1.4;
+}
