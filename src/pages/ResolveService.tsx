@@ -269,20 +269,15 @@ const ResolveService = () => {
       </section>
 
       {/* How It Works - Vertical Timeline */}
-      <section className="py-12 bg-gray-900 text-white relative">
-        {/* Gradient fade from section above */}
-        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-gray-50 to-transparent pointer-events-none"></div>
-        
-        {/* Gradient fade to section below */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-              How Re:Solve <span className="text-slate-700">Works</span> in Your Inbox
-            </h2>
-            
-            <div ref={timelineRef} className="space-y-12 relative">
+      <section className="relative bg-gradient-to-b from-gray-50 via-gray-900 to-gray-50 text-white">
+        <div className="py-24 bg-gray-900/95">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+                How Re:Solve <span className="text-slate-700">Works</span> in Your Inbox
+              </h2>
+              
+              <div ref={timelineRef} className="space-y-12 relative">
               <div className={`flex items-start space-x-8 timeline-step transition-all duration-700 ${
                 visibleTimelineSteps.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`} data-step="0">
@@ -356,6 +351,7 @@ const ResolveService = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
