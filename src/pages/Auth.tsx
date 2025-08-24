@@ -60,13 +60,15 @@ const Auth = () => {
       
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <Link to="/" className="inline-block mb-4">
-            <img 
-              src="/lovable-uploads/85295fab-5654-420c-b051-efeeb126f374.png" 
-              alt="Reforzo Logo" 
-              className="h-12 w-auto hover:scale-105 transition-transform"
-            />
-          </Link>
+          <div className="flex justify-center mb-4">
+            <Link to="/" className="inline-block">
+              <img 
+                src="/lovable-uploads/85295fab-5654-420c-b051-efeeb126f374.png" 
+                alt="Reforzo Logo" 
+                className="h-12 w-auto hover:scale-105 transition-transform"
+              />
+            </Link>
+          </div>
           <CardTitle>Client Login</CardTitle>
           <CardDescription>
             Access your client dashboard with the credentials provided by Reforzo
