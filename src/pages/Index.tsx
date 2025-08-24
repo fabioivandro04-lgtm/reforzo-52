@@ -10,8 +10,16 @@ import SEO from '@/components/SEO';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useDailyCounter } from '@/hooks/useDailyCounter';
 
 const Index = () => {
+  const { currentValue: clientSatisfaction, isAnimating } = useDailyCounter({
+    baseValue: 95,
+    storageKey: 'clientSatisfaction',
+    minIncrement: 0,
+    maxIncrement: 5
+  });
+
   // Fix any ID conflicts when the page loads
   useEffect(() => {
     const contactElements = document.querySelectorAll('[id="contact"]');
@@ -81,7 +89,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="text-3xl font-bold text-white mb-2">95%</div>
+                <div className={`text-3xl font-bold text-white mb-2 ${isAnimating ? 'animate-pulse' : ''}`}>{clientSatisfaction}%</div>
                 <div className="text-gray-300 text-sm">Client Satisfaction</div>
               </motion.div>
               
