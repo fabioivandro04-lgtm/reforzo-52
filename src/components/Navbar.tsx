@@ -31,7 +31,7 @@ const Navbar = () => {
     }}
   >
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
-        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18 w-full">
+        <div className="flex items-center justify-start h-14 sm:h-16 lg:h-18 w-full gap-8 lg:gap-12">
           {/* Logo - Responsive sizing */}
           <motion.div 
             className="flex-shrink-0"
@@ -237,25 +237,27 @@ const Navbar = () => {
             </motion.div>
           </div>
           
-          {/* Mobile/Tablet menu button - Visible on smaller screens */}
-          <motion.button 
-            onClick={toggleMenu} 
-            className="xl:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200"
-            whileHover={{ scale: 1.05, backgroundColor: "#f9fafb" }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            <motion.div
-              animate={isMenuOpen ? "open" : "closed"}
-              variants={{
-                open: { rotate: 180 },
-                closed: { rotate: 0 }
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+          {/* Mobile/Tablet menu button - Positioned to the right */}
+          <div className="xl:hidden ml-auto">
+            <motion.button 
+              onClick={toggleMenu} 
+              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200"
+              whileHover={{ scale: 1.05, backgroundColor: "#f9fafb" }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </motion.div>
-          </motion.button>
+              <motion.div
+                animate={isMenuOpen ? "open" : "closed"}
+                variants={{
+                  open: { rotate: 180 },
+                  closed: { rotate: 0 }
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </motion.div>
+            </motion.button>
+          </div>
         </div>
       </div>
 
