@@ -9,6 +9,7 @@ import BlogPreview from '@/components/BlogPreview';
 import SEO from '@/components/SEO';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Index = () => {
   // Fix any ID conflicts when the page loads
@@ -32,8 +33,22 @@ const Index = () => {
       <Hero />
       
       {/* New Section */}
-      <section className="h-screen bg-white flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="h-screen bg-white flex items-center relative overflow-hidden">
+        {/* Fade Effect Overlay */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/95 to-white"
+          initial={{ opacity: 0.8 }}
+          animate={{ 
+            opacity: [0.8, 0.95, 0.8],
+          }}
+          transition={{ 
+            duration: 6, 
+            repeat: Infinity, 
+            ease: [0.4, 0, 0.2, 1],
+            repeatType: "reverse"
+          }}
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
               Transform Your Business Today
