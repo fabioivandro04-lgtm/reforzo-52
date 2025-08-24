@@ -493,41 +493,6 @@ const TheSignal = () => {
         </motion.div>
       </section>
 
-      {/* How to Choose & Next Steps */}
-      <section 
-        ref={nextStepsRef}
-        className="py-20 bg-slate-50"
-      >
-        <motion.div
-          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate={visibleSections.nextSteps ? "visible" : "hidden"}
-        >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-              How to Choose & Next Steps
-            </h2>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="space-y-8">
-
-
-
-            <Card className="p-8 border-l-4 border-l-blue-500 bg-blue-50">
-              <h3 className="text-lg font-semibold text-slate-900 mb-3">Final Thought</h3>
-              <p className="text-slate-700 mb-4">
-                The Signal is a fantastic, strong name on its own. The simplest option is often the best. 
-                You could easily just go with:
-              </p>
-              <div className="bg-white p-4 rounded-lg border border-blue-200">
-                <h4 className="text-xl font-bold text-slate-900 mb-2">The Signal</h4>
-                <p className="text-slate-600 italic">Your weekly briefing on the future of technology.</p>
-              </div>
-            </Card>
-          </motion.div>
-        </motion.div>
-      </section>
 
       {/* Final CTA */}
       <section 
