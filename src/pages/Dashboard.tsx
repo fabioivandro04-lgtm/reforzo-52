@@ -55,14 +55,14 @@ const Dashboard = () => {
         .from('profiles')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (profileError) {
         setError('Failed to load profile data');
         return;
       }
 
-      if (!profileData.onboarding_completed) {
+      if (!profileData || !profileData.onboarding_completed) {
         navigate('/onboarding');
         return;
       }
