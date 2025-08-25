@@ -20,7 +20,9 @@ const Login = () => {
   const { user } = useAuth();
 
   useEffect(() => {
+    console.log('Login useEffect - user:', user?.email);
     if (user) {
+      console.log('Redirecting to dashboard...');
       navigate('/dashboard');
     }
   }, [user, navigate]);
