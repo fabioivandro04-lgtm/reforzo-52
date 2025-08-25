@@ -9,7 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
-import { User, Building, Phone, Mail, CreditCard, Calendar, Shield, Settings, ArrowLeft } from 'lucide-react';
+import { User, Building, Phone, Mail, CreditCard, Calendar, Shield, Settings } from 'lucide-react';
+import HomeButton from '@/components/HomeButton';
 
 interface Profile {
   full_name: string;
@@ -170,12 +171,7 @@ const Dashboard = () => {
                   </a>
                 </Button>
               )}
-              <Button asChild variant="outline" size="sm">
-                <a href="/">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Site
-                </a>
-              </Button>
+              <HomeButton />
               <Button onClick={handleSignOut} variant="outline">
                 Sign Out
               </Button>

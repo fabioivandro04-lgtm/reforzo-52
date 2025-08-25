@@ -73,6 +73,9 @@ const Login = () => {
         } else {
           navigate('/onboarding');
         }
+      } else {
+        // If no profile found, redirect to onboarding
+        navigate('/onboarding');
       }
     } catch (err) {
       setError('An unexpected error occurred. Please try again.');

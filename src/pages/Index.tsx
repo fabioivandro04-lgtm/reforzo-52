@@ -6,6 +6,7 @@ import Features from '@/components/Features';
 import Projects from '@/components/Projects';
 import WhyWrlds from '@/components/WhyWrlds';
 import BlogPreview from '@/components/BlogPreview';
+import CallToAction from '@/components/CallToAction';
 import SEO from '@/components/SEO';
 import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
@@ -40,10 +41,16 @@ const Index = () => {
       <SEO 
         title="Reforzo - Reinforce your business" 
         description="Use innovative metrics to evolve and modernize your business. Reforzo helps SMEs and corporations achieve measurable operational excellence through integrated people, processes, and technology."
-        imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+        imageUrl="/og-image.png"
         keywords={['business consulting', 'operational efficiency', 'productivity optimization', 'process improvement', 'performance growth', 'SME consulting']}
       />
       <Hero />
+      
+      {/* Benefits Section */}
+      <Benefits />
+      
+      {/* Features Section */}
+      <Features />
       
       {/* Professional Value Proposition Section */}
       <section className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black flex items-center relative overflow-hidden py-10 sm:py-16 lg:py-20">
@@ -85,6 +92,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
             >
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-white/10 transition-all duration-300">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -100,6 +108,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
             >
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-white/10 transition-all duration-300">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -115,6 +124,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
             >
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-white/10 transition-all duration-300">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -133,6 +143,7 @@ const Index = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
             >
               <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2 sm:mb-3">40%</div>
               <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-widest">Efficiency Gain</div>
@@ -143,6 +154,7 @@ const Index = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
             >
               <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2 sm:mb-3">98%</div>
               <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-widest">Client Retention</div>
@@ -153,6 +165,7 @@ const Index = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
             >
               <div className={`text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2 sm:mb-3 ${isAnimating ? 'animate-pulse' : ''}`}>{businessesTransformed}+</div>
               <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-widest">Transformations</div>
@@ -163,6 +176,7 @@ const Index = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
             >
               <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2 sm:mb-3">24/7</div>
               <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-widest">Support</div>
@@ -170,6 +184,18 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Why Choose Us Section */}
+      <WhyWrlds />
+      
+      {/* Projects Section */}
+      <Projects />
+      
+      {/* Blog Preview Section */}
+      <BlogPreview />
+      
+      {/* Call to Action Section */}
+      <CallToAction />
       
     </PageLayout>
   );

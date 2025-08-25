@@ -11,8 +11,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
+import HomeButton from '@/components/HomeButton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Trash2, Edit2, Plus, UserPlus, UserMinus, Shield, ArrowLeft, Home } from 'lucide-react';
+import { Trash2, Edit2, Plus, UserPlus, UserMinus, Shield, ArrowLeft } from 'lucide-react';
 
 interface Service {
   id: string;
@@ -247,12 +248,7 @@ const AdminPanel = () => {
                 Back to Dashboard
               </a>
             </Button>
-            <Button asChild variant="outline" size="sm">
-              <a href="/">
-                <Home className="w-4 h-4 mr-2" />
-                Back to Site
-              </a>
-            </Button>
+            <HomeButton />
           </div>
         </div>
 
