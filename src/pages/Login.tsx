@@ -56,34 +56,18 @@ const Login = () => {
       }
 
       if (data.user) {
+        console.log('Login: User signed in successfully:', data.user.id);
+        
         toast({
           title: "Welcome back!",
           description: "You have been successfully logged in.",
         });
         
-        // Create profile if it doesn't exist and redirect to dashboard
-        try {
-          const { data: profile, error: profileError } = await supabase
-            .from('profiles')
-            .select('onboarding_completed')
-            .eq('user_id', data.user.id)
-            .maybeSingle();
-
-          if (!profile && !profileError) {
-            await supabase
-              .from('profiles')
-              .insert({
-                user_id: data.user.id,
-                email: data.user.email,
-                onboarding_completed: true
-              });
-          }
-        } catch (error) {
-          console.log('Profile handling error (non-critical):', error);
-        }
-        
-        // Always redirect to dashboard
-        navigate('/dashboard');
+        // Small delay to ensure auth state is updated
+        setTimeout(() => {
+          console.log('Login: Navigating to dashboard');
+          navigate('/dashboard');
+        }, 100);
       }
     } catch (err) {
       setError('An unexpected error occurred. Please try again.');

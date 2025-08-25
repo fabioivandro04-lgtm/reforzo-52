@@ -41,13 +41,17 @@ const Dashboard = () => {
   const { roles, isAdmin } = useRoles();
 
   useEffect(() => {
+    console.log('Dashboard: Auth state changed - loading:', authLoading, 'user:', !!user);
+    
     if (authLoading) return; // Wait for auth to load
     
     if (!user) {
+      console.log('Dashboard: No user found, redirecting to login');
       navigate('/login');
       return;
     }
 
+    console.log('Dashboard: User authenticated, fetching data');
     fetchUserData();
   }, [user, navigate, authLoading]);
 
@@ -55,6 +59,8 @@ const Dashboard = () => {
     if (!user) return;
     
     try {
+      console.log('Dashboard: Fetching user data for user:', user.id);
+      
       // Fetch user profile
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
@@ -62,17 +68,43 @@ const Dashboard = () => {
         .eq('user_id', user.id)
         .maybeSingle();
 
+      console.log('Dashboard: Profile data:', profileData, 'Error:', profileError);
+
       if (profileError) {
+        console.error('Dashboard: Profile fetch error:', profileError);
         setError('Failed to load profile data');
         return;
       }
 
-      if (!profileData || !profileData.onboarding_completed) {
+      if (!profileData) {
+        console.log('Dashboard: No profile found, creating one...');
+        // Create profile if it doesn't exist
+        const { data: newProfile, error: createError } = await supabase
+          .from('profiles')
+          .insert({
+            user_id: user.id,
+            email: user.email,
+            onboarding_completed: true
+          })
+          .select()
+          .single();
+          
+        if (createError) {
+          console.error('Dashboard: Profile creation error:', createError);
+          setError('Failed to create profile');
+          return;
+        }
+        
+        console.log('Dashboard: Created new profile:', newProfile);
+        setProfile(newProfile);
+      } else if (!profileData.onboarding_completed) {
+        console.log('Dashboard: Profile exists but onboarding not completed, redirecting...');
         navigate('/onboarding');
         return;
+      } else {
+        console.log('Dashboard: Profile loaded successfully');
+        setProfile(profileData);
       }
-
-      setProfile(profileData);
 
       // Fetch user services
       const { data: servicesData, error: servicesError } = await supabase
