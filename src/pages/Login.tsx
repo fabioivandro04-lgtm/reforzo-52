@@ -47,7 +47,7 @@ const Login = () => {
           title: "Welcome back!",
           description: "You have been successfully logged in.",
         });
-        // Navigation will occur when auth state updates and user becomes available
+        navigate('/dashboard');
 
       }
     } catch (err) {
