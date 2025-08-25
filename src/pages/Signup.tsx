@@ -115,7 +115,7 @@ const Signup = () => {
     }
 
     try {
-      const redirectUrl = `${window.location.origin}/onboarding`;
+      const redirectUrl = `${window.location.origin}/dashboard`;
       
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -154,9 +154,24 @@ const Signup = () => {
         setSuccess(true);
         toast({
           title: "Welcome to Reforzo!",
-          description: "Your account has been created successfully.",
+          description: "Your account has been created successfully. Redirecting to your dashboard...",
         });
-        navigate('/onboarding');
+        
+        // Create basic profile if needed, then redirect to dashboard
+        setTimeout(async () => {
+          try {
+            await supabase
+              .from('profiles')
+              .upsert({
+                user_id: data.user.id,
+                email: data.user.email,
+                onboarding_completed: true
+              });
+          } catch (error) {
+            console.log('Profile creation error (non-critical):', error);
+          }
+          navigate('/dashboard');
+        }, 1500);
       }
     } catch (err) {
       setErrors({ general: 'An unexpected error occurred. Please try again.' });
@@ -173,20 +188,20 @@ const Signup = () => {
           title="Check Your Email - Reforzo"
           description="Please verify your email to complete your Reforzo account setup"
         />
-        <div className="min-h-screen flex items-center justify-center bg-background p-4">
-          <Card className="w-full max-w-md">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md shadow-lg">
             <CardHeader className="text-center">
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                 <CheckCircle className="h-6 w-6 text-green-600" />
               </div>
               <CardTitle className="text-2xl font-bold">Check Your Email</CardTitle>
               <CardDescription>
-                We've sent a verification link to <strong>{email}</strong>
+                We've sent a verification link to <strong>{email}</strong>. Once verified, you'll be redirected to your dashboard.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-sm text-muted-foreground text-center">
-                <p>Click the link in the email to verify your account and complete the setup process.</p>
+                <p>Click the link in the email to verify your account and access your dashboard.</p>
                 <p className="mt-2">Can't find the email? Check your spam folder.</p>
               </div>
               
@@ -211,10 +226,10 @@ const Signup = () => {
 
   if (initializing) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent mx-auto mb-3"></div>
-          <p className="text-sm text-muted-foreground">Loading...</p>
+          <p className="text-sm text-muted-foreground">Initializing...</p>
         </div>
       </div>
     );
@@ -226,12 +241,21 @@ const Signup = () => {
         title="Sign Up - Reforzo"
         description="Create your Reforzo account to access our business consulting services"
       />
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="space-y-1">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-lg">
+          <CardHeader className="space-y-1 text-center">
+            <div className="flex justify-center mb-4">
+              <Link to="/" className="inline-block">
+                <img 
+                  src="/lovable-uploads/85295fab-5654-420c-b051-efeeb126f374.png" 
+                  alt="Reforzo Logo" 
+                  className="h-12 w-auto animate-fade-in hover:scale-110 transition-all duration-300 ease-out"
+                />
+              </Link>
+            </div>
             <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
             <CardDescription className="text-center">
-              Join Reforzo to access our premium business services
+              Join Reforzo to access your business dashboard
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -324,16 +348,16 @@ const Signup = () => {
 
               <Button 
                 type="submit" 
-                className="w-full" 
+                className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed" 
                 disabled={loading || Object.keys(errors).length > 0}
               >
                 {loading ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-background border-t-transparent mr-2" />
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
                     Creating account...
                   </>
                 ) : (
-                  'Create Account'
+                  'Create Account & Access Dashboard'
                 )}
               </Button>
             </form>

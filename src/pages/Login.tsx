@@ -61,21 +61,30 @@ const Login = () => {
           description: "You have been successfully logged in.",
         });
         
-        // Check if user has completed onboarding
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('onboarding_completed')
-          .eq('user_id', data.user.id)
-          .single();
+        // Create profile if it doesn't exist and redirect to dashboard
+        try {
+          const { data: profile, error: profileError } = await supabase
+            .from('profiles')
+            .select('onboarding_completed')
+            .eq('user_id', data.user.id)
+            .single();
         
-        if (profile?.onboarding_completed) {
-          navigate('/dashboard');
-        } else {
-          navigate('/onboarding');
+          if (profileError && profileError.code === 'PGRST116') {
+            // Profile doesn't exist, create it
+            await supabase
+              .from('profiles')
+              .insert({
+                user_id: data.user.id,
+                email: data.user.email,
+                onboarding_completed: true
+              });
+          }
+        } catch (error) {
+          console.log('Profile handling error (non-critical):', error);
         }
-      } else {
-        // If no profile found, redirect to onboarding
-        navigate('/onboarding');
+        
+        // Always redirect to dashboard
+        navigate('/dashboard');
       }
     } catch (err) {
       setError('An unexpected error occurred. Please try again.');
@@ -89,12 +98,21 @@ const Login = () => {
         title="Login - Reforzo"
         description="Sign in to your Reforzo account to access your personalized dashboard"
       />
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="space-y-1">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-lg">
+          <CardHeader className="space-y-1 text-center">
+            <div className="flex justify-center mb-4">
+              <Link to="/" className="inline-block">
+                <img 
+                  src="/lovable-uploads/85295fab-5654-420c-b051-efeeb126f374.png" 
+                  alt="Reforzo Logo" 
+                  className="h-12 w-auto animate-fade-in hover:scale-110 transition-all duration-300 ease-out"
+                />
+              </Link>
+            </div>
             <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
             <CardDescription className="text-center">
-              Enter your credentials to access your account
+              Enter your credentials to access your dashboard
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -128,14 +146,14 @@ const Login = () => {
                 </Alert>
               )}
 
-              <Button type="submit" className="w-full" disabled={signingIn || loading}>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed" disabled={signingIn || loading}>
                 {signingIn ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-background border-t-transparent mr-2" />
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
                     Signing in...
                   </>
                 ) : (
-                  'Sign In'
+                  'Sign In to Dashboard'
                 )}
               </Button>
             </form>
