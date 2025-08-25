@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
-import { User, Building, Phone, Mail, CreditCard, Calendar, Shield, Settings } from 'lucide-react';
+import { User, Building, Phone, Mail, CreditCard, Calendar, Shield, Settings, ArrowLeft } from 'lucide-react';
 
 interface Profile {
   full_name: string;
@@ -170,6 +170,12 @@ const Dashboard = () => {
               <p className="text-muted-foreground">Manage your account and track your services</p>
             </div>
             <div className="flex items-center gap-2">
+              <Button asChild variant="outline" size="sm">
+                <a href="/">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Site
+                </a>
+              </Button>
               {isAdmin && (
                 <Button asChild variant="outline" size="sm">
                   <a href="/admin">
