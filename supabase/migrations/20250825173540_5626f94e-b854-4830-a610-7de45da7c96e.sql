@@ -1,0 +1,1 @@
+SELECT grant_role_by_email('fabioivandro04@gmail.com', 'admin');
