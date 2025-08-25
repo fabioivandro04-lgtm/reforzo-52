@@ -176,14 +176,6 @@ const Dashboard = () => {
                   Back to Site
                 </a>
               </Button>
-              {isAdmin && (
-                <Button asChild variant="outline" size="sm">
-                  <a href="/admin">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Admin Panel
-                  </a>
-                </Button>
-              )}
               <Button onClick={handleSignOut} variant="outline">
                 Sign Out
               </Button>
