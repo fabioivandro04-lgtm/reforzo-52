@@ -36,17 +36,19 @@ const Dashboard = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading: authLoading } = useAuth();
   const { roles, isAdmin } = useRoles();
 
   useEffect(() => {
+    if (authLoading) return; // Wait for auth to load
+    
     if (!user) {
       navigate('/login');
       return;
     }
 
     fetchUserData();
-  }, [user, navigate]);
+  }, [user, navigate, authLoading]);
 
   const fetchUserData = async () => {
     if (!user) return;
@@ -124,7 +126,7 @@ const Dashboard = () => {
     }
   };
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
