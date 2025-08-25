@@ -1,4 +1,4 @@
-// Service Worker for caching and performance optimization
+// Service Worker for caching and performance optimization (security-enhanced)
 
 const CACHE_NAME = 'reforzo-v1';
 const STATIC_ASSETS = [
@@ -33,13 +33,32 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - serve from cache, fallback to network (security-enhanced)
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
   
   // Skip chrome-extension requests
   if (event.request.url.startsWith('chrome-extension://')) return;
+  
+  const url = new URL(event.request.url);
+  
+  // Security: Don't cache authenticated requests or sensitive endpoints
+  const shouldNotCache = 
+    event.request.headers.has('authorization') ||
+    event.request.headers.has('x-supabase-auth') ||
+    url.pathname.includes('/auth/') ||
+    url.pathname.includes('/api/') ||
+    url.pathname.includes('/functions/') ||
+    url.hostname.includes('supabase') ||
+    url.pathname.includes('/dashboard') ||
+    url.pathname.includes('/admin');
+  
+  if (shouldNotCache) {
+    // Always fetch from network for sensitive requests
+    event.respondWith(fetch(event.request));
+    return;
+  }
   
   event.respondWith(
     caches.match(event.request)
