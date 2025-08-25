@@ -1,12 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 
+interface AuthState {
+  user: User | null;
+  session: Session | null;
+  loading: boolean;
+  initializing: boolean;
+}
+
 export const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [state, setState] = useState<AuthState>({
+    user: null,
+    session: null,
+    loading: true,
+    initializing: true
+  });
+  
   const initialized = useRef(false);
+
+  // Optimized state updater
+  const updateAuthState = useCallback((session: Session | null, isInitial = false) => {
+    setState(prev => ({
+      ...prev,
+      session,
+      user: session?.user ?? null,
+      loading: false,
+      initializing: isInitial ? false : prev.initializing
+    }));
+  }, []);
 
   useEffect(() => {
     if (initialized.current) return;
@@ -14,38 +36,51 @@ export const useAuth = () => {
 
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        // do not toggle loading here to avoid flicker during transitions
+      (event, session) => {
+        updateAuthState(session);
+        
+        // Handle specific auth events for better UX
+        if (event === 'SIGNED_IN') {
+          // User just signed in, minimal loading state
+          setState(prev => ({ ...prev, loading: false }));
+        } else if (event === 'SIGNED_OUT') {
+          // Clear all state on sign out
+          setState({
+            user: null,
+            session: null,
+            loading: false,
+            initializing: false
+          });
+        }
       }
     );
 
     // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false); // resolve initial loading state once
+      updateAuthState(session, true);
     });
 
     return () => {
       subscription.unsubscribe();
       initialized.current = false;
     };
-  }, []);
+  }, [updateAuthState]);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
+    setState(prev => ({ ...prev, loading: true }));
     const { error } = await supabase.auth.signOut();
     if (error) {
-      console.error('Error signing out:', error);
+      setState(prev => ({ ...prev, loading: false }));
+      throw error;
     }
-  };
+  }, []);
 
   return {
-    user,
-    session,
-    loading,
+    user: state.user,
+    session: state.session,
+    loading: state.loading,
+    initializing: state.initializing,
     signOut,
-    isAuthenticated: !!user
+    isAuthenticated: !!state.user
   };
 };

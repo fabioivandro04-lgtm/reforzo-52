@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, Suspense, lazy } from "react";
 import PageTransition from "./components/PageTransition";
 import LoadingAnimation from "./components/LoadingAnimation";
+import LoadingSpinner from "./components/LoadingSpinner";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 // Lazy load pages to reduce initial bundle size
@@ -55,7 +56,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <PageTransition>
-              <Suspense fallback={<LoadingAnimation />}>
+              <Suspense fallback={<LoadingSpinner size="md" text="Loading page..." className="min-h-screen" />}>
                 <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/resolve" element={<ResolveService />} />
@@ -76,21 +77,21 @@ const App = () => {
                 
                 {/* Protected routes */}
                 <Route path="/onboarding" element={
-                  <Suspense fallback={<LoadingAnimation />}>
+                  <Suspense fallback={<LoadingSpinner size="md" text="Loading onboarding..." className="min-h-screen" />}>
                     <ProtectedRoute>
                       <Onboarding />
                     </ProtectedRoute>
                   </Suspense>
                 } />
                 <Route path="/dashboard" element={
-                  <Suspense fallback={<LoadingAnimation />}>
+                  <Suspense fallback={<LoadingSpinner size="md" text="Loading dashboard..." className="min-h-screen" />}>
                     <ProtectedRoute>
                       <Dashboard />
                     </ProtectedRoute>
                   </Suspense>
                 } />
                 <Route path="/admin" element={
-                  <Suspense fallback={<LoadingAnimation />}>
+                  <Suspense fallback={<LoadingSpinner size="md" text="Loading admin panel..." className="min-h-screen" />}>
                     <AdminRoute>
                       <AdminPanel />
                     </AdminRoute>
