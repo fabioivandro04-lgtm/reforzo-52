@@ -14,10 +14,10 @@ export const useAuth = () => {
 
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (_event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
-        setLoading(false);
+        // do not toggle loading here to avoid flicker during transitions
       }
     );
 
@@ -25,7 +25,7 @@ export const useAuth = () => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      setLoading(false);
+      setLoading(false); // resolve initial loading state once
     });
 
     return () => {
