@@ -30,9 +30,9 @@ const Onboarding = lazy(() => import("./pages/Onboarding"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 
-// Import ProtectedRoute component
-const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
-const AdminRoute = lazy(() => import("./components/AdminRoute"));
+// Import Protected routes synchronously to avoid dynamic import fetch issues
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
