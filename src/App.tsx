@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, Suspense, lazy } from "react";
 import { ThemeProvider } from "next-themes";
-import { TooltipProvider } from "@/components/ui/tooltip";
+
 import PageTransition from "./components/PageTransition";
 import LoadingAnimation from "./components/LoadingAnimation";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -59,7 +59,6 @@ const App = () => {
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider delayDuration={0}>
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -111,7 +110,6 @@ const App = () => {
                 </Suspense>
               </PageTransition>
             </BrowserRouter>
-          </TooltipProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </ErrorBoundary>
