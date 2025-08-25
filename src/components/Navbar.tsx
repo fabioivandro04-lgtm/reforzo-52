@@ -51,15 +51,23 @@ const Navbar = () => {
                     </div>
                     <span className="font-medium text-white">{user.email?.split('@')[0]}</span>
                   </div>
+                  <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                    <Link to="/dashboard">Dashboard</Link>
+                  </Button>
                   <Button variant="outline" size="sm" onClick={signOut} className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white">
                     <LogOut size={14} className="mr-1.5" />
                     Sign Out
                   </Button>
                 </div>
               ) : (
-                <Button asChild size="sm" className="bg-white text-black hover:bg-gray-200">
-                  <Link to="/auth">Sign In</Link>
-                </Button>
+                <div className="flex items-center space-x-2">
+                  <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                    <Link to="/login">Sign In</Link>
+                  </Button>
+                  <Button asChild size="sm" className="bg-white text-black hover:bg-gray-200">
+                    <Link to="/signup">Sign Up</Link>
+                  </Button>
+                </div>
               )
             )}
           </div>
@@ -114,6 +122,16 @@ const Navbar = () => {
                       </div>
                     </div>
                     <Button
+                      asChild
+                      variant="ghost"
+                      size="sm"
+                      className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white"
+                    >
+                      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                        Dashboard
+                      </Link>
+                    </Button>
+                    <Button
                       variant="outline"
                       size="sm"
                       onClick={() => {
@@ -127,11 +145,18 @@ const Navbar = () => {
                     </Button>
                   </div>
                 ) : (
-                  <Button asChild size="sm" className="w-full bg-white text-black hover:bg-gray-200">
-                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                      Sign In
-                    </Link>
-                  </Button>
+                  <div className="space-y-2">
+                    <Button asChild variant="ghost" size="sm" className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white">
+                      <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                        Sign In
+                      </Link>
+                    </Button>
+                    <Button asChild size="sm" className="w-full bg-white text-black hover:bg-gray-200">
+                      <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                        Sign Up
+                      </Link>
+                    </Button>
+                  </div>
                 )
               )}
             </div>

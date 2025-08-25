@@ -22,6 +22,16 @@ const Auth = lazy(() => import("./pages/Auth"));
 const ResolveService = lazy(() => import("./pages/ResolveService"));
 const TheSignal = lazy(() => import("./pages/TheSignal"));
 
+// New auth pages
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const Onboarding = lazy(() => import("./pages/Onboarding"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+
+// Import ProtectedRoute component
+const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
+
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
 
@@ -45,6 +55,28 @@ const App = () => {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/news/:slug" element={<BlogPostDetail />} />
+                
+                {/* New auth routes */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                
+                {/* Protected routes */}
+                <Route path="/onboarding" element={
+                  <Suspense fallback={<LoadingAnimation />}>
+                    <ProtectedRoute>
+                      <Onboarding />
+                    </ProtectedRoute>
+                  </Suspense>
+                } />
+                <Route path="/dashboard" element={
+                  <Suspense fallback={<LoadingAnimation />}>
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  </Suspense>
+                } />
+                
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
