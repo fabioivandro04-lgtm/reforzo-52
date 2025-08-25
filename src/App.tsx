@@ -16,13 +16,15 @@ const BusinessAssessment = lazy(() => import("./pages/BusinessAssessment"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const About = lazy(() => import("./pages/About"));
 const Methodology = lazy(() => import("./pages/Methodology"));
-const Careers = lazy(() => import("./pages/Careers"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const News = lazy(() => import("./pages/News"));
 const BlogPostDetail = lazy(() => import("./pages/BlogPostDetail"));
 const Auth = lazy(() => import("./pages/Auth"));
 const ResolveService = lazy(() => import("./pages/ResolveService"));
 const TheSignal = lazy(() => import("./pages/TheSignal"));
+
+// Import Careers directly to avoid lazy loading issues
+import Careers from "./pages/Careers";
 
 // New auth pages
 const Login = lazy(() => import("./pages/Login"));
