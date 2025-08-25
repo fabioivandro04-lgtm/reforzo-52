@@ -158,18 +158,18 @@ const Dashboard = () => {
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl font-bold">Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}!</h1>
-                {roles.map((role) => (
-                  <Badge key={role} variant={role === 'admin' ? 'default' : 'secondary'}>
-                    {role === 'admin' && <Shield className="w-3 h-3 mr-1" />}
-                    {role}
-                  </Badge>
-                ))}
-              </div>
+              <h1 className="text-3xl font-bold">Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}!</h1>
               <p className="text-muted-foreground">Manage your account and track your services</p>
             </div>
             <div className="flex items-center gap-2">
+              {isAdmin && (
+                <Button asChild variant="default" size="sm">
+                  <a href="/admin">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Admin Panel
+                  </a>
+                </Button>
+              )}
               <Button asChild variant="outline" size="sm">
                 <a href="/">
                   <ArrowLeft className="w-4 h-4 mr-2" />
@@ -181,6 +181,35 @@ const Dashboard = () => {
               </Button>
             </div>
           </div>
+
+          {/* Admin Quick Access Card - Only for Admins */}
+          {isAdmin && (
+            <Card className="border-primary/20 bg-primary/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-primary">
+                  <Shield className="h-5 w-5" />
+                  Administrator Access
+                </CardTitle>
+                <CardDescription>
+                  You have administrative privileges. Access advanced management tools.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">Admin Panel Features:</p>
+                    <p className="text-sm text-muted-foreground">Manage services, users, and system roles</p>
+                  </div>
+                  <Button asChild>
+                    <a href="/admin">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Open Admin Panel
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Profile Information */}
           <Card>
