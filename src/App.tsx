@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, Suspense, lazy } from "react";
 import PageTransition from "./components/PageTransition";
 import LoadingAnimation from "./components/LoadingAnimation";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Lazy load pages to reduce initial bundle size
 const Index = lazy(() => import("./pages/Index"));
@@ -35,17 +36,27 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 
 const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 10, // 10 minutes
+        retry: 1,
+        refetchOnWindowFocus: false,
+      },
+    },
+  }));
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <PageTransition>
-            <Suspense fallback={<LoadingAnimation />}>
-              <Routes>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <PageTransition>
+              <Suspense fallback={<LoadingAnimation />}>
+                <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/resolve" element={<ResolveService />} />
                 <Route path="/signal" element={<TheSignal />} />
@@ -87,12 +98,13 @@ const App = () => {
                 } />
                 
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </PageTransition>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+                </Routes>
+              </Suspense>
+            </PageTransition>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 

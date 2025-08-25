@@ -90,7 +90,7 @@ const Dashboard = () => {
         .eq('user_id', user.id);
 
       if (servicesError) {
-        console.error('Failed to load services:', servicesError);
+        // Handle services loading error silently
       } else {
         const formattedServices = servicesData.map(item => ({
           id: item.id,

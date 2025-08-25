@@ -7,7 +7,7 @@ import Projects from '@/components/Projects';
 import WhyWrlds from '@/components/WhyWrlds';
 import BlogPreview from '@/components/BlogPreview';
 import SEO from '@/components/SEO';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useDailyCounter } from '@/hooks/useDailyCounter';
 
@@ -19,11 +19,18 @@ const Index = () => {
     maxIncrement: 5
   });
 
-  // Fix any ID conflicts when the page loads
+  // Memoize animation variants for better performance
+  const animationVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
+    scale: { opacity: 0, scale: 0.9 },
+    scaleVisible: { opacity: 1, scale: 1 }
+  }), []);
+
+  // Clean up any duplicate IDs on mount
   useEffect(() => {
     const contactElements = document.querySelectorAll('[id="contact"]');
     if (contactElements.length > 1) {
-      // If there are multiple elements with id="contact", rename one
       contactElements[1].id = 'contact-footer';
     }
   }, []);
@@ -44,9 +51,10 @@ const Index = () => {
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <motion.h2 
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-4 sm:mb-6 tracking-wide px-2"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={animationVariants.hidden}
+              whileInView={animationVariants.visible}
               transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
               Excellence in Business
               <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-300 mt-1 sm:mt-2">
@@ -58,12 +66,14 @@ const Index = () => {
               initial={{ opacity: 0, scaleX: 0 }}
               whileInView={{ opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
             />
             <motion.p 
               className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light px-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={animationVariants.hidden}
+              whileInView={animationVariants.visible}
               transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
             >
               Reforzo delivers strategic consulting solutions that drive measurable operational excellence through innovative metrics and proven methodologies.
             </motion.p>
