@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, Shield } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useAuth } from '@/hooks/useAuth';
+import { useRoles } from '@/hooks/useRoles';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut, loading } = useAuth();
+  const { isAdmin } = useRoles();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -54,6 +56,14 @@ const Navbar = () => {
                   <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
                     <Link to="/dashboard">Dashboard</Link>
                   </Button>
+                  {isAdmin && (
+                    <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                      <Link to="/admin">
+                        <Shield size={14} className="mr-1.5" />
+                        Admin
+                      </Link>
+                    </Button>
+                  )}
                   <Button variant="outline" size="sm" onClick={signOut} className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white">
                     <LogOut size={14} className="mr-1.5" />
                     Sign Out
@@ -131,6 +141,19 @@ const Navbar = () => {
                         Dashboard
                       </Link>
                     </Button>
+                    {isAdmin && (
+                      <Button
+                        asChild
+                        variant="ghost"
+                        size="sm"
+                        className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white"
+                      >
+                        <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
+                          <Shield size={16} className="mr-2" />
+                          Admin
+                        </Link>
+                      </Button>
+                    )}
                     <Button
                       variant="outline"
                       size="sm"

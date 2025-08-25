@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useRoles } from '@/hooks/useRoles';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
-import { User, Building, Phone, Mail, CreditCard, Calendar } from 'lucide-react';
+import { User, Building, Phone, Mail, CreditCard, Calendar, Shield, Settings } from 'lucide-react';
 
 interface Profile {
   full_name: string;
@@ -36,6 +37,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user, signOut } = useAuth();
+  const { roles, isAdmin } = useRoles();
 
   useEffect(() => {
     if (!user) {
@@ -154,12 +156,30 @@ const Dashboard = () => {
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold">Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}!</h1>
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-3xl font-bold">Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}!</h1>
+                {roles.map((role) => (
+                  <Badge key={role} variant={role === 'admin' ? 'default' : 'secondary'}>
+                    {role === 'admin' && <Shield className="w-3 h-3 mr-1" />}
+                    {role}
+                  </Badge>
+                ))}
+              </div>
               <p className="text-muted-foreground">Manage your account and track your services</p>
             </div>
-            <Button onClick={handleSignOut} variant="outline">
-              Sign Out
-            </Button>
+            <div className="flex items-center gap-2">
+              {isAdmin && (
+                <Button asChild variant="outline" size="sm">
+                  <a href="/admin">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Admin Panel
+                  </a>
+                </Button>
+              )}
+              <Button onClick={handleSignOut} variant="outline">
+                Sign Out
+              </Button>
+            </div>
           </div>
 
           {/* Profile Information */}
