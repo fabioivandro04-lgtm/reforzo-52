@@ -67,10 +67,9 @@ const Login = () => {
             .from('profiles')
             .select('onboarding_completed')
             .eq('user_id', data.user.id)
-            .single();
-        
-          if (profileError && profileError.code === 'PGRST116') {
-            // Profile doesn't exist, create it
+            .maybeSingle();
+
+          if (!profile && !profileError) {
             await supabase
               .from('profiles')
               .insert({

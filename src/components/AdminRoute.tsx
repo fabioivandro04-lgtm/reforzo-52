@@ -9,10 +9,10 @@ interface AdminRouteProps {
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, initializing } = useAuth();
   const { isAdmin, loading: rolesLoading } = useRoles();
 
-  if (authLoading || rolesLoading) {
+  if (authLoading || initializing || rolesLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
