@@ -1,9 +1,9 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, Suspense, lazy } from "react";
+import { ThemeProvider } from "next-themes";
 import PageTransition from "./components/PageTransition";
 import LoadingAnimation from "./components/LoadingAnimation";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -52,57 +52,64 @@ const App = () => {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <PageTransition>
-            <Suspense fallback={<LoadingSpinner size="md" text="Loading page..." className="min-h-screen" />}>
-              <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/resolve" element={<ResolveService />} />
-              <Route path="/signal" element={<TheSignal />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/business-assessment" element={<BusinessAssessment />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/methodology" element={<Methodology />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/news/:slug" element={<BlogPostDetail />} />
-              
-              {/* New auth routes */}
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              
-              {/* Protected routes */}
-              <Route path="/onboarding" element={
-                <Suspense fallback={<LoadingSpinner size="md" text="Loading onboarding..." className="min-h-screen" />}>
-                  <ProtectedRoute>
-                    <Onboarding />
-                  </ProtectedRoute>
-                </Suspense>
-              } />
-              <Route path="/dashboard" element={
-                <Suspense fallback={<LoadingSpinner size="md" text="Loading dashboard..." className="min-h-screen" />}>
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                </Suspense>
-              } />
-              <Route path="/admin" element={
-                <Suspense fallback={<LoadingSpinner size="md" text="Loading admin panel..." className="min-h-screen" />}>
-                  <AdminRoute>
-                    <AdminPanel />
-                  </AdminRoute>
-                </Suspense>
-              } />
-              
-              <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </PageTransition>
-        </BrowserRouter>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <PageTransition>
+              <Suspense fallback={<LoadingSpinner size="md" text="Loading page..." className="min-h-screen" />}>
+                <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/resolve" element={<ResolveService />} />
+                <Route path="/signal" element={<TheSignal />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/business-assessment" element={<BusinessAssessment />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/methodology" element={<Methodology />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/news" element={<News />} />
+                <Route path="/news/:slug" element={<BlogPostDetail />} />
+                
+                {/* New auth routes */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                
+                {/* Protected routes */}
+                <Route path="/onboarding" element={
+                  <Suspense fallback={<LoadingSpinner size="md" text="Loading onboarding..." className="min-h-screen" />}>
+                    <ProtectedRoute>
+                      <Onboarding />
+                    </ProtectedRoute>
+                  </Suspense>
+                } />
+                <Route path="/dashboard" element={
+                  <Suspense fallback={<LoadingSpinner size="md" text="Loading dashboard..." className="min-h-screen" />}>
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  </Suspense>
+                } />
+                <Route path="/admin" element={
+                  <Suspense fallback={<LoadingSpinner size="md" text="Loading admin panel..." className="min-h-screen" />}>
+                    <AdminRoute>
+                      <AdminPanel />
+                    </AdminRoute>
+                  </Suspense>
+                } />
+                
+                <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </PageTransition>
+          </BrowserRouter>
+        </ThemeProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );
