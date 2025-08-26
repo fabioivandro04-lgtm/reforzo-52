@@ -70,36 +70,6 @@ export type Database = {
           },
         ]
       }
-      profile_access_log: {
-        Row: {
-          accessed_at: string | null
-          accessed_profile_id: string | null
-          action: string
-          id: string
-          ip_address: unknown | null
-          user_agent: string | null
-          user_id: string | null
-        }
-        Insert: {
-          accessed_at?: string | null
-          accessed_profile_id?: string | null
-          action: string
-          id?: string
-          ip_address?: unknown | null
-          user_agent?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          accessed_at?: string | null
-          accessed_profile_id?: string | null
-          action?: string
-          id?: string
-          ip_address?: unknown | null
-          user_agent?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           company_name: string | null

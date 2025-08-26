@@ -22,7 +22,7 @@ const Auth = () => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate('/dashboard');
+        navigate('/');
       }
     };
     checkUser();
@@ -46,11 +46,7 @@ const Auth = () => {
         setError(error.message);
       }
     } else {
-      toast({
-        title: "Welcome back!",
-        description: "You have been successfully logged in.",
-      });
-      navigate('/dashboard');
+      navigate('/');
     }
     setLoading(false);
   };
@@ -62,7 +58,7 @@ const Auth = () => {
         description="Sign in to your Reforzo account to access your dashboard and business insights."
       />
       
-      <Card className="w-full max-w-md shadow-lg">
+      <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <Link to="/" className="inline-block">
@@ -111,20 +107,13 @@ const Auth = () => {
               </Alert>
             )}
             
-              <Button 
-                type="submit" 
-                className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed" 
-                disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
-                    Signing in...
-                  </>
-                ) : (
-                  'Sign In to Dashboard'
-                )}
-              </Button>
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={loading}
+            >
+              {loading ? 'Signing in...' : 'Sign In'}
+            </Button>
           </form>
           
           <div className="mt-6 space-y-3">

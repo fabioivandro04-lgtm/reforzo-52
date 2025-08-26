@@ -66,6 +66,7 @@ const Assessment = () => {
 
     // Simple bot detection
     if (formData.honeypot) {
+      console.log('Bot detected: honeypot field filled');
       setIsSubmitting(false);
       return;
     }
@@ -73,6 +74,7 @@ const Assessment = () => {
     // Time-based bot detection (form filled too quickly)
     const timeSpent = Date.now() - formStartTime;
     if (timeSpent < 3000) { // Less than 3 seconds
+      console.log('Bot detected: form filled too quickly');
       setIsSubmitting(false);
       return;
     }
@@ -92,7 +94,7 @@ const Assessment = () => {
         throw error;
       }
 
-      
+      console.log('Assessment form submitted successfully:', data);
       
       toast({
         title: "Assessment Request Submitted!",
@@ -101,7 +103,7 @@ const Assessment = () => {
 
       form.reset();
     } catch (error) {
-      
+      console.error('Error submitting assessment form:', error);
       toast({
         title: "Submission Failed",
         description: "There was an error submitting your assessment request. Please try again or contact us directly.",

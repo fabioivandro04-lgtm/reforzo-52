@@ -10,7 +10,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
 import { User, Building, Phone, Mail, CreditCard, Calendar, Shield, Settings } from 'lucide-react';
-import HomeButton from '@/components/HomeButton';
 
 interface Profile {
   full_name: string;
@@ -37,30 +36,22 @@ const Dashboard = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, signOut, loading: authLoading } = useAuth();
+  const { user, signOut } = useAuth();
   const { roles, isAdmin } = useRoles();
 
   useEffect(() => {
-    console.log('Dashboard: Auth state changed - loading:', authLoading, 'user:', !!user);
-    
-    if (authLoading) return; // Wait for auth to load
-    
     if (!user) {
-      console.log('Dashboard: No user found, redirecting to login');
       navigate('/login');
       return;
     }
 
-    console.log('Dashboard: User authenticated, fetching data');
     fetchUserData();
-  }, [user, navigate, authLoading]);
+  }, [user, navigate]);
 
   const fetchUserData = async () => {
     if (!user) return;
     
     try {
-      console.log('Dashboard: Fetching user data for user:', user.id);
-      
       // Fetch user profile
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
@@ -68,43 +59,17 @@ const Dashboard = () => {
         .eq('user_id', user.id)
         .maybeSingle();
 
-      console.log('Dashboard: Profile data:', profileData, 'Error:', profileError);
-
       if (profileError) {
-        console.error('Dashboard: Profile fetch error:', profileError);
         setError('Failed to load profile data');
         return;
       }
 
-      if (!profileData) {
-        console.log('Dashboard: No profile found, creating one...');
-        // Create profile if it doesn't exist
-        const { data: newProfile, error: createError } = await supabase
-          .from('profiles')
-          .insert({
-            user_id: user.id,
-            email: user.email,
-            onboarding_completed: true
-          })
-          .select()
-          .single();
-          
-        if (createError) {
-          console.error('Dashboard: Profile creation error:', createError);
-          setError('Failed to create profile');
-          return;
-        }
-        
-        console.log('Dashboard: Created new profile:', newProfile);
-        setProfile(newProfile);
-      } else if (!profileData.onboarding_completed) {
-        console.log('Dashboard: Profile exists but onboarding not completed, redirecting...');
+      if (!profileData || !profileData.onboarding_completed) {
         navigate('/onboarding');
         return;
-      } else {
-        console.log('Dashboard: Profile loaded successfully');
-        setProfile(profileData);
       }
+
+      setProfile(profileData);
 
       // Fetch user services
       const { data: servicesData, error: servicesError } = await supabase
@@ -123,7 +88,7 @@ const Dashboard = () => {
         .eq('user_id', user.id);
 
       if (servicesError) {
-        // Handle services loading error silently
+        console.error('Failed to load services:', servicesError);
       } else {
         const formattedServices = servicesData.map(item => ({
           id: item.id,
@@ -159,7 +124,7 @@ const Dashboard = () => {
     }
   };
 
-  if (authLoading || loading) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -191,53 +156,31 @@ const Dashboard = () => {
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold">Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}!</h1>
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-3xl font-bold">Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}!</h1>
+                {roles.map((role) => (
+                  <Badge key={role} variant={role === 'admin' ? 'default' : 'secondary'}>
+                    {role === 'admin' && <Shield className="w-3 h-3 mr-1" />}
+                    {role}
+                  </Badge>
+                ))}
+              </div>
               <p className="text-muted-foreground">Manage your account and track your services</p>
             </div>
             <div className="flex items-center gap-2">
               {isAdmin && (
-                <Button asChild variant="default" size="sm">
+                <Button asChild variant="outline" size="sm">
                   <a href="/admin">
                     <Settings className="w-4 h-4 mr-2" />
                     Admin Panel
                   </a>
                 </Button>
               )}
-              <HomeButton />
               <Button onClick={handleSignOut} variant="outline">
                 Sign Out
               </Button>
             </div>
           </div>
-
-          {/* Admin Quick Access Card - Only for Admins */}
-          {isAdmin && (
-            <Card className="border-primary/20 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-primary">
-                  <Shield className="h-5 w-5" />
-                  Administrator Access
-                </CardTitle>
-                <CardDescription>
-                  You have administrative privileges. Access advanced management tools.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Admin Panel Features:</p>
-                    <p className="text-sm text-muted-foreground">Manage services, users, and system roles</p>
-                  </div>
-                  <Button asChild>
-                    <a href="/admin">
-                      <Settings className="w-4 h-4 mr-2" />
-                      Open Admin Panel
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           {/* Profile Information */}
           <Card>

@@ -21,10 +21,10 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-// EmailJS configuration - using environment variables for security
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_i3h66xg';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_fgq53nh';
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'wQmcZvoOqTAhGnRZ3';
+// EmailJS configuration - Updated with correct template ID
+const EMAILJS_SERVICE_ID = "service_i3h66xg";
+const EMAILJS_TEMPLATE_ID = "template_fgq53nh"; // Updated to the correct template ID
+const EMAILJS_PUBLIC_KEY = "wQmcZvoOqTAhGnRZ3";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,6 +50,7 @@ const ContactForm = () => {
       // Bot checks
       // 1. Honeypot check - should be caught by zod, but double-check
       if (data.honeypot) {
+        console.log('Bot detected via honeypot');
         toast({
           title: "Error",
           description: "There was a problem with your submission. Please try again.",
@@ -61,6 +62,7 @@ const ContactForm = () => {
       // 2. Time-based check - Submission should take at least 3 seconds (too fast is likely a bot)
       const timeDiff = Date.now() - data.timestamp;
       if (timeDiff < 3000) {
+        console.log(`Bot detected: Form submitted too quickly (${timeDiff}ms)`);
         toast({
           title: "Error",
           description: "Please take a moment to review your message before submitting.",
@@ -69,6 +71,8 @@ const ContactForm = () => {
         setIsSubmitting(false);
         return;
       }
+      
+      console.log('Form submitted:', data);
       
       // Remove honeypot and timestamp fields before sending
       const { honeypot, timestamp, ...emailData } = data;
@@ -82,6 +86,10 @@ const ContactForm = () => {
         reply_to: emailData.email // Keeping reply_to for compatibility
       };
       
+      console.log('Sending email with params:', templateParams);
+      console.log('Using service:', EMAILJS_SERVICE_ID);
+      console.log('Using template:', EMAILJS_TEMPLATE_ID);
+      console.log('Using public key:', EMAILJS_PUBLIC_KEY);
       
       // Send email directly without initializing, as it's not needed with the send method that includes the key
       const response = await emailjs.send(
@@ -91,7 +99,7 @@ const ContactForm = () => {
         EMAILJS_PUBLIC_KEY // Re-adding the public key parameter
       );
       
-      
+      console.log('Email sent successfully:', response);
       
       toast({
         title: "Message sent!",
@@ -107,6 +115,12 @@ const ContactForm = () => {
         timestamp: Date.now()
       });
     } catch (error) {
+      console.error('Error sending email:', error);
+      
+      // More detailed error logging
+      if (error && typeof error === 'object' && 'text' in error) {
+        console.error('Error details:', (error as any).text);
+      }
       
       toast({
         title: "Error",

@@ -74,6 +74,9 @@ const Navbar = () => {
                   <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
                     <Link to="/login">Sign In</Link>
                   </Button>
+                  <Button asChild size="sm" className="bg-white text-black hover:bg-gray-200">
+                    <Link to="/signup">Sign Up</Link>
+                  </Button>
                 </div>
               )
             )}
@@ -169,6 +172,11 @@ const Navbar = () => {
                     <Button asChild variant="ghost" size="sm" className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white">
                       <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                         Sign In
+                      </Link>
+                    </Button>
+                    <Button asChild size="sm" className="w-full bg-white text-black hover:bg-gray-200">
+                      <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                        Sign Up
                       </Link>
                     </Button>
                   </div>

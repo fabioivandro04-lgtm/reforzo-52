@@ -18,13 +18,5 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: ["react", "react-dom"],
-  },
-  define: {
-    // Ensure single React instance
-    'process.env.NODE_ENV': JSON.stringify(mode),
-  },
-  optimizeDeps: {
-    include: ["react", "react-dom"],
   },
 }));

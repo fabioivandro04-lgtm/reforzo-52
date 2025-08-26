@@ -11,9 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
-import HomeButton from '@/components/HomeButton';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Trash2, Edit2, Plus, UserPlus, UserMinus, Shield, ArrowLeft } from 'lucide-react';
+import { Trash2, Edit2, Plus, UserPlus, UserMinus } from 'lucide-react';
 
 interface Service {
   id: string;
@@ -225,61 +223,25 @@ const AdminPanel = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Admin Panel - Reforzo"
+        title="Admin Panel"
         description="Administrative dashboard for managing services, users, and roles"
       />
       <div className="container mx-auto px-4 py-8">
-        {/* Admin Header with Navigation */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-3xl font-bold text-primary">Admin Panel</h1>
-              <Badge variant="default" className="bg-primary">
-                <Shield className="w-3 h-3 mr-1" />
-                Administrator
-              </Badge>
-            </div>
-            <p className="text-muted-foreground">Manage services, users, and system settings</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button asChild variant="outline" size="sm">
-              <a href="/dashboard">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dashboard
-              </a>
-            </Button>
-            <HomeButton />
-          </div>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">Admin Panel</h1>
+          <p className="text-muted-foreground">Manage services, users, and system settings</p>
         </div>
 
-        {/* Admin Alert */}
-        <Alert className="mb-6 border-destructive/50 bg-destructive/10">
-          <Shield className="h-4 w-4" />
-          <AlertDescription>
-            <strong>Administrative Access:</strong> You are accessing sensitive system management tools. 
-            All actions are logged and monitored.
-          </AlertDescription>
-        </Alert>
-
         <Tabs defaultValue="services" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-muted">
-            <TabsTrigger value="services" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              Services Management
-            </TabsTrigger>
-            <TabsTrigger value="users" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              User Management
-            </TabsTrigger>
-            <TabsTrigger value="roles" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              Role Management
-            </TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="services">Services</TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
+            <TabsTrigger value="roles">Roles</TabsTrigger>
           </TabsList>
 
           <TabsContent value="services" className="space-y-6">
             <div className="flex justify-between items-center">
-              <div>
-                <h2 className="text-2xl font-bold">Services Management</h2>
-                <p className="text-muted-foreground">Create, edit, and manage system services</p>
-              </div>
+              <h2 className="text-2xl font-bold">Services Management</h2>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button onClick={() => setEditingService(null)}>
@@ -367,10 +329,7 @@ const AdminPanel = () => {
           </TabsContent>
 
           <TabsContent value="users" className="space-y-6">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold">User Management</h2>
-              <p className="text-muted-foreground">View and manage all registered users</p>
-            </div>
+            <h2 className="text-2xl font-bold">User Management</h2>
             <div className="grid gap-4">
               {profiles.map((profile) => (
                 <Card key={profile.id}>
@@ -397,10 +356,7 @@ const AdminPanel = () => {
 
           <TabsContent value="roles" className="space-y-6">
             <div className="flex justify-between items-center">
-              <div>
-                <h2 className="text-2xl font-bold">Role Management</h2>
-                <p className="text-muted-foreground">Grant and revoke user permissions</p>
-              </div>
+              <h2 className="text-2xl font-bold">Role Management</h2>
               <Card className="p-4">
                 <div className="flex space-x-2">
                   <Input
