@@ -1,9 +1,11 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, Suspense, lazy } from "react";
+import * as React from "react";
 import PageTransition from "./components/PageTransition";
 import LoadingAnimation from "./components/LoadingAnimation";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -49,11 +51,17 @@ const App = () => {
     },
   }));
 
+  // Development-only React version check
+  if (process.env.NODE_ENV === 'development') {
+    console.log('React version:', React.version);
+  }
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <Toaster />
-        <Sonner />
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
           <BrowserRouter>
             <PageTransition>
               <Suspense fallback={<LoadingSpinner size="md" text="Loading page..." className="min-h-screen" />}>
@@ -102,7 +110,8 @@ const App = () => {
                 </Routes>
               </Suspense>
             </PageTransition>
-        </BrowserRouter>
+          </BrowserRouter>
+        </TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );

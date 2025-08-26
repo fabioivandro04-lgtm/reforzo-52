@@ -3,7 +3,22 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
-const TooltipProvider = TooltipPrimitive.Provider
+// Safe wrapper that only renders on client-side to avoid React hook issues
+const SafeTooltipProvider = ({ children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) => {
+  const [isMounted, setIsMounted] = React.useState(false)
+  
+  React.useEffect(() => {
+    setIsMounted(true)
+  }, [])
+  
+  if (!isMounted) {
+    return <>{children}</>
+  }
+  
+  return <TooltipPrimitive.Provider {...props}>{children}</TooltipPrimitive.Provider>
+}
+
+const TooltipProvider = SafeTooltipProvider
 
 const Tooltip = TooltipPrimitive.Root
 
