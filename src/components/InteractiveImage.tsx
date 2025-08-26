@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ZoomIn, ZoomOut, Move } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { toast } from 'sonner';
 
@@ -220,7 +220,6 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
       
       {/* Controls overlay */}
       <div className="absolute bottom-3 right-3 flex gap-2">
-        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -235,9 +234,7 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
             </TooltipTrigger>
             <TooltipContent>Zoom In</TooltipContent>
           </Tooltip>
-        </TooltipProvider>
         
-        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -252,7 +249,6 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
             </TooltipTrigger>
             <TooltipContent>Zoom Out</TooltipContent>
           </Tooltip>
-        </TooltipProvider>
       </div>
       
       {/* Help tooltip */}
