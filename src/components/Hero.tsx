@@ -77,7 +77,7 @@ const Hero = () => {
           style={{ y: 0 }}
         >
           <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full">
-            <motion.div className="w-full max-w-4xl text-center" variants={itemVariants}>
+            <motion.div className="w-full max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl text-center" variants={itemVariants}>
               <motion.h1 
                 className="banner-title text-white drop-shadow-lg" 
                 variants={itemVariants}

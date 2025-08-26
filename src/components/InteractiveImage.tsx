@@ -1,9 +1,9 @@
 
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ZoomIn, ZoomOut, Move } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { toast } from 'sonner';
 
@@ -14,17 +14,17 @@ interface InteractiveImageProps {
 }
 
 const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const imageRef = React.useRef<HTMLImageElement>(null);
-  const [scale, setScale] = React.useState(1);
-  const [position, setPosition] = React.useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 });
-  const [showInstructions, setShowInstructions] = React.useState(true);
-  const [isMobile, setIsMobile] = React.useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Check if device is mobile
-  React.useEffect(() => {
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -36,7 +36,7 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
   }, []);
   
   // Show instructions tooltip initially, then fade out
-  React.useEffect(() => {
+  useEffect(() => {
     if (showInstructions) {
       const timer = setTimeout(() => {
         setShowInstructions(false);
@@ -47,7 +47,7 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
   }, [showInstructions]);
   
   // Display instruction toast on mount
-  React.useEffect(() => {
+  useEffect(() => {
     const message = isMobile 
       ? "Tap to zoom and drag with your finger to explore"
       : "Click to zoom and drag to explore the image";
@@ -220,6 +220,7 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
       
       {/* Controls overlay */}
       <div className="absolute bottom-3 right-3 flex gap-2">
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -234,7 +235,9 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
             </TooltipTrigger>
             <TooltipContent>Zoom In</TooltipContent>
           </Tooltip>
+        </TooltipProvider>
         
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -249,6 +252,7 @@ const InteractiveImage = ({ src, alt, className }: InteractiveImageProps) => {
             </TooltipTrigger>
             <TooltipContent>Zoom Out</TooltipContent>
           </Tooltip>
+        </TooltipProvider>
       </div>
       
       {/* Help tooltip */}

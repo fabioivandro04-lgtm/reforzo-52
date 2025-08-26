@@ -1,13 +1,13 @@
 
 import { MessageSquare } from "lucide-react";
-import React from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 const FloatingContactButton = () => {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   
   // Show the button after scrolling down a bit
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       if (scrollY > 500) {
