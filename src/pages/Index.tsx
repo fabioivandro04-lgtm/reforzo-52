@@ -10,16 +10,8 @@ import SEO from '@/components/SEO';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useDailyCounter } from '@/hooks/useDailyCounter';
 
 const Index = () => {
-  const { currentValue: businessesTransformed, isAnimating } = useDailyCounter({
-    baseValue: 500,
-    storageKey: 'businessesTransformed',
-    minIncrement: 0,
-    maxIncrement: 5
-  });
-
   // Fix any ID conflicts when the page loads
   useEffect(() => {
     const contactElements = document.querySelectorAll('[id="contact"]');
@@ -89,8 +81,8 @@ const Index = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="text-3xl font-bold text-white mb-2">40%</div>
-                <div className="text-gray-300 text-sm">Average Efficiency Gain</div>
+                <div className="text-3xl font-bold text-white mb-2">95%</div>
+                <div className="text-gray-300 text-sm">Client Satisfaction</div>
               </motion.div>
               
               <motion.div 
@@ -99,8 +91,8 @@ const Index = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <div className="text-3xl font-bold text-white mb-2">98%</div>
-                <div className="text-gray-300 text-sm">Client Retention Rate</div>
+                <div className="text-3xl font-bold text-white mb-2">40%</div>
+                <div className="text-gray-300 text-sm">Average Efficiency Gain</div>
               </motion.div>
               
               <motion.div 
@@ -109,7 +101,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <div className={`text-3xl font-bold text-white mb-2 ${isAnimating ? 'animate-pulse' : ''}`}>{businessesTransformed}+</div>
+                <div className="text-3xl font-bold text-white mb-2">500+</div>
                 <div className="text-gray-300 text-sm">Businesses Transformed</div>
               </motion.div>
               
