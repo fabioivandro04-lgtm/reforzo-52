@@ -20,6 +20,10 @@ export default defineConfig(({ mode }) => ({
     },
     dedupe: ["react", "react-dom"],
   },
+  define: {
+    // Ensure single React instance
+    'process.env.NODE_ENV': JSON.stringify(mode),
+  },
   optimizeDeps: {
     include: ["react", "react-dom"],
   },

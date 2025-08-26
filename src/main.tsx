@@ -7,6 +7,16 @@ import { preloadCriticalResources, addStructuredData, organizationSchema } from 
 
 // Initialize performance optimizations
 if (typeof window !== 'undefined') {
+  // Debug React version in development
+  if (process.env.NODE_ENV === 'development') {
+    import('react').then((React) => {
+      console.log('React version:', React.version);
+      console.log('React instance:', !!React.default);
+    }).catch(() => {
+      console.error('Failed to load React module');
+    });
+  }
+  
   // Preload critical resources
   preloadCriticalResources();
   
