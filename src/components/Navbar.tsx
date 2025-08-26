@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { Menu, X, User, LogOut, Shield } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useAuth } from '@/hooks/useAuth';
-import { useRoles } from '@/hooks/useRoles';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut, loading } = useAuth();
-  const { isAdmin } = useRoles();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -53,31 +51,15 @@ const Navbar = () => {
                     </div>
                     <span className="font-medium text-white">{user.email?.split('@')[0]}</span>
                   </div>
-                  <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
-                    <Link to="/dashboard">Dashboard</Link>
-                  </Button>
-                  {isAdmin && (
-                    <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
-                      <Link to="/admin">
-                        <Shield size={14} className="mr-1.5" />
-                        Admin
-                      </Link>
-                    </Button>
-                  )}
                   <Button variant="outline" size="sm" onClick={signOut} className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white">
                     <LogOut size={14} className="mr-1.5" />
                     Sign Out
                   </Button>
                 </div>
               ) : (
-                <div className="flex items-center space-x-2">
-                  <Button asChild variant="ghost" size="sm" className="text-gray-300 hover:text-white">
-                    <Link to="/login">Sign In</Link>
-                  </Button>
-                  <Button asChild size="sm" className="bg-white text-black hover:bg-gray-200">
-                    <Link to="/signup">Sign Up</Link>
-                  </Button>
-                </div>
+                <Button asChild size="sm" className="bg-white text-black hover:bg-gray-200">
+                  <Link to="/auth">Sign In</Link>
+                </Button>
               )
             )}
           </div>
@@ -132,29 +114,6 @@ const Navbar = () => {
                       </div>
                     </div>
                     <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white"
-                    >
-                      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                        Dashboard
-                      </Link>
-                    </Button>
-                    {isAdmin && (
-                      <Button
-                        asChild
-                        variant="ghost"
-                        size="sm"
-                        className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white"
-                      >
-                        <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
-                          <Shield size={16} className="mr-2" />
-                          Admin
-                        </Link>
-                      </Button>
-                    )}
-                    <Button
                       variant="outline"
                       size="sm"
                       onClick={() => {
@@ -168,18 +127,11 @@ const Navbar = () => {
                     </Button>
                   </div>
                 ) : (
-                  <div className="space-y-2">
-                    <Button asChild variant="ghost" size="sm" className="w-full justify-start text-gray-300 hover:bg-gray-800 hover:text-white">
-                      <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                        Sign In
-                      </Link>
-                    </Button>
-                    <Button asChild size="sm" className="w-full bg-white text-black hover:bg-gray-200">
-                      <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                        Sign Up
-                      </Link>
-                    </Button>
-                  </div>
+                  <Button asChild size="sm" className="w-full bg-white text-black hover:bg-gray-200">
+                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                      Sign In
+                    </Link>
+                  </Button>
                 )
               )}
             </div>
