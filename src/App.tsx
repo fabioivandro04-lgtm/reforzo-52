@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import PageTransition from "./components/PageTransition";
 import LoadingAnimation from "./components/LoadingAnimation";
 
@@ -23,7 +23,7 @@ const ResolveService = lazy(() => import("./pages/ResolveService"));
 const TheSignal = lazy(() => import("./pages/TheSignal"));
 
 const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = React.useState(() => new QueryClient());
 
   return (
     <QueryClientProvider client={queryClient}>
