@@ -142,12 +142,6 @@ const Login = () => {
             </form>
 
             <div className="mt-6 text-center text-sm">
-              <p className="text-muted-foreground">
-                Don't have an account?{' '}
-                <Link to="/signup" className="text-primary hover:underline">
-                  Sign up
-                </Link>
-              </p>
               <p className="mt-2">
                 <Link to="/forgot-password" className="text-primary hover:underline">
                   Forgot your password?
