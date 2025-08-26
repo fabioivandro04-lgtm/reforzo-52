@@ -5,13 +5,8 @@ import { cn } from "@/lib/utils"
 
 // Safe wrapper that only renders on client-side to avoid React hook issues
 const SafeTooltipProvider = ({ children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) => {
-  const [isMounted, setIsMounted] = React.useState(false)
-  
-  React.useEffect(() => {
-    setIsMounted(true)
-  }, [])
-  
-  if (!isMounted) {
+  // Check if we're on the client side without using hooks
+  if (typeof window === 'undefined') {
     return <>{children}</>
   }
   
