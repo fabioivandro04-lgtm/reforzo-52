@@ -1,7 +1,6 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, Suspense, lazy } from "react";
@@ -53,9 +52,8 @@ const App = () => {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
+        <Toaster />
+        <Sonner />
           <BrowserRouter>
             <PageTransition>
               <Suspense fallback={<LoadingSpinner size="md" text="Loading page..." className="min-h-screen" />}>
@@ -104,8 +102,7 @@ const App = () => {
                 </Routes>
               </Suspense>
             </PageTransition>
-          </BrowserRouter>
-        </TooltipProvider>
+        </BrowserRouter>
       </QueryClientProvider>
     </ErrorBoundary>
   );
